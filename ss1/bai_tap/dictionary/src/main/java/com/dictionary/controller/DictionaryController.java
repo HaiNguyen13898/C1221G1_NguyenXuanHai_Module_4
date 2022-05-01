@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 @Controller
@@ -22,12 +23,14 @@ public class DictionaryController {
     }
 
     @PostMapping("search")
-    public String search (@RequestParam String search, Model model) {
+    public String search(@RequestParam String search, Model model) {
         String result = translate.dictionary(search);
-        model.addAttribute("result", result);
-        return "result";
-
+        if (result != null) {
+            model.addAttribute("result", result);
+            return "result";
+        } else {
+            model.addAttribute("error", "Not found!!!");
+            return "error";
+        }
     }
-
-
 }

@@ -12,8 +12,7 @@
 </head>
 <body>
 <h3>
-    Result:
-    ${result}
+    Result: ${result}
 </h3>
 
 </body>
