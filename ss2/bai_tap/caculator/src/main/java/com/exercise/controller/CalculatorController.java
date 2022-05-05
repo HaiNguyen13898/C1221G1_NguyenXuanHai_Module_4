@@ -22,7 +22,7 @@ public class CalculatorController {
     }
 
 
-    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    @RequestMapping(value = "/result", method = RequestMethod.POST)
     public String getResult(@RequestParam double a, @RequestParam double b, @RequestParam String cal, Model model) {
         double sums = iCalculator.addition(a, b);
         double subtractions = iCalculator.subtraction(a, b);

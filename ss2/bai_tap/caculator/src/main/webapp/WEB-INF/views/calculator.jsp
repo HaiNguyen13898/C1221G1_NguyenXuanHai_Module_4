@@ -8,10 +8,9 @@
 
 <h1>
     Calculator
-    ${message}
 </h1>
 
-<form action="/result" method="get">
+<form action="/result" method="post">
     <div>
         <input type="text" name="a">
         <input type="text" name="b">

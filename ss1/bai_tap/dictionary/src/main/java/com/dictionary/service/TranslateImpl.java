@@ -6,15 +6,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class TranslateImpl implements ITranslate{
-
-    @Override
-    public String dictionary(String search) {
-        Map<String, String> dictionary = new HashMap<>();
+public class TranslateImpl implements ITranslate {
+    static Map<String, String> dictionary = new HashMap<>();
+    static {
         dictionary.put("hello", "Xin chào");
         dictionary.put("how", "Thế nào");
         dictionary.put("book", "Quyển vở");
         dictionary.put("computer", "Máy tính");
+    }
+
+
+    @Override
+    public String dictionary(String search) {
+//        Map<String, String> dictionary = new HashMap<>();
+//        dictionary.put("hello", "Xin chào");
+//        dictionary.put("how", "Thế nào");
+//        dictionary.put("book", "Quyển vở");
+//        dictionary.put("computer", "Máy tính");
+
         return dictionary.get(search);
     }
 }

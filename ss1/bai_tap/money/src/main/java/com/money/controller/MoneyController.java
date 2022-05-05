@@ -1,6 +1,4 @@
 package com.money.controller;
-
-
 import com.money.service.ChangeMoneyImpl;
 import com.money.service.IChangeMoney;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class MoneyController {
     }
 
     @PostMapping ("/change")
-    public String changeMoney (@RequestParam  Integer usd, Model model) {
+    public String changeMoney (@RequestParam Integer usd, Model model) {
         int vnd = changeMoney.changeMoney(usd);
         model.addAttribute("vnd", vnd);
         return "calculator";
