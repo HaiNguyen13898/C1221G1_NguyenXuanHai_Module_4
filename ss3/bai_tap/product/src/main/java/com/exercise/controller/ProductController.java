@@ -50,5 +50,32 @@ public class ProductController {
         return "redirect:/product";
     }
 
+    @GetMapping("/delete")
+    public String deleteForm(@RequestParam int id,Model model){
+        model.addAttribute("product",productService.findById(id));
+        return "delete";
+    }
 
+    @PostMapping("/delete")
+    public String deleteProduct(Product product,RedirectAttributes redirectAttributes){
+        productService.remove(product.getId());
+        redirectAttributes.addFlashAttribute("message","Successful delete ");
+        return "redirect:/product";
+    }
+    @GetMapping("/view")
+    public String view(@RequestParam int id,Model model){
+        model.addAttribute("product",productService.findById(id));
+        return "view";
+    }
+
+    @GetMapping("/search")
+    public String searchByName(@RequestParam String nameProduct,Model model){
+        List<Product> productList = productService.searchByName(nameProduct);
+        if (productList.isEmpty()) {
+            model.addAttribute("message", "Not found any product");
+        } else {
+            model.addAttribute("productList", productList);
+        }
+        return "list";
+    }
 }

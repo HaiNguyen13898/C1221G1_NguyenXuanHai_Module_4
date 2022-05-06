@@ -3,10 +3,7 @@ package com.exercise.service;
 import com.exercise.model.Product;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -53,7 +50,7 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> searchByName(String nameProduct) {
         List<Product> productList = new ArrayList<>();
         for (Product product : productMap.values()) {
-            if (product.getProductName().contains(nameProduct)) {
+            if (product.getProductName().toLowerCase().contains(nameProduct)) {
                 productList.add(product);
             }
         }

@@ -6,30 +6,38 @@
 </head>
 <body>
 <center>
-    <form th:action="@{/product/save}" th:object="${product}" method="post">
-        <table>
-            <tr>
-                <th>Product Name</th>
-                <td><input type="text" th:field="*{productName}"></td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td><input type="text" th:field="*{price}"></td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td><input type="text" th:field="*{description}"></td>
-            </tr>
-            <tr>
-                <th>Producer</th>
-                <td><input type="text" th:field="*{producer}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Save"></td>
-            </tr>
+    <h3>Create product</h3>
+    <h2>
+        <a th:href="@{/product}"> Back to Product List</a>
+    </h2>
 
-        </table>
+    <form th:action="@{/product/save}" th:object="${product}" method="post">
+        <fieldset>
+            <legend>Form create product</legend>
+            <table border="1">
+                <tr>
+                    <th>Product Name</th>
+                    <td><input type="text" th:field="*{productName}"></td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td><input type="text" th:field="*{price}"></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td><input type="text" th:field="*{description}"></td>
+                </tr>
+                <tr>
+                    <th>Producer</th>
+                    <td><input type="text" th:field="*{producer}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Save"></td>
+                </tr>
+
+            </table>
+        </fieldset>
     </form>
 </center>
 </body>

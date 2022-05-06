@@ -13,6 +13,13 @@
 
     <p th:text="${message}" style="color: red"></p>
 
+    <form action="/product/search" method="get">
+        <label>Search by name product: </label>
+        <input type="text" name="nameProduct">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+
     <table border="1">
         <thead>
         <tr>
@@ -26,12 +33,12 @@
         </thead>
         <tbody>
         <tr th:each="products : ${productList}">
-            <td><a th:text="${products.productName}" th:href="@{/product/{id}/view(id=${products.id})}"></a></td>
+            <td><a th:text="${products.productName}" th:href="@{/product/view(id=${products.id})}"></a></td>
             <td th:text="${products.price}"></td>
             <td th:text="${products.description}"></td>
             <td th:text="${products.producer}"></td>
             <td><a th:href="@{/product/edit(id=${products.id})}">edit</a></td>
-            <td>delete</td>
+            <td><a th:href="@{/product/delete(id=${products.id})}"> delete</a></td>
         </tr>
         </tbody>
     </table>
