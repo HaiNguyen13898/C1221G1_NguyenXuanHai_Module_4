@@ -31,7 +31,7 @@
             <td th:text="${products.description}"></td>
             <td th:text="${products.producer}"></td>
             <td><a th:href="@{/product/edit(id=${products.id})}">edit</a></td>
-            <td><a th:href="@{/product/{id}/delete(id=${products.id})}">delete</a></td>
+            <td>delete</td>
         </tr>
         </tbody>
     </table>
