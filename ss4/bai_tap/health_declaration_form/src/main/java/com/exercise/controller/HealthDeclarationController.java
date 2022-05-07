@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HealthDeclarationController {
 
-    @GetMapping("/create")
+    @GetMapping("")
     public String showForm(Model model) {
-        model.addAttribute("health", new HealthDeclaration());
+        model.addAttribute("form", new HealthDeclaration());
         model.addAttribute("nationality", new String[]{"Việt Nam", "Lào", "Thái Lan", "Trung",});
         model.addAttribute("gender", new String[]{"Nam", "Nữ", "Bê đê"});
         model.addAttribute("vehicle", new String[]{"Tàu", "Xe máy", "Máy bay", "Đi bộ", "Người yêu cõng"});
@@ -22,9 +22,8 @@ public class HealthDeclarationController {
 
     @PostMapping("/create")
     public String displayInformation(@ModelAttribute HealthDeclaration health, Model model) {
-        model.addAttribute("form", health);
+        model.addAttribute("health", health);
         return "display";
     }
-
 
 }
