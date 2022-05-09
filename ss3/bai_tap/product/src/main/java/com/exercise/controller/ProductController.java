@@ -17,7 +17,7 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping("")
-    public String showList(Model model){
+    public String showList(Model model) {
         List<Product> productList = productService.findAll();
         model.addAttribute("productList", productList);
         return "list";
@@ -33,38 +33,40 @@ public class ProductController {
     @PostMapping(value = "/save")
     public String save(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         productService.save(product);
-        redirectAttributes.addFlashAttribute("message","Successfully added new");
+        redirectAttributes.addFlashAttribute("message", "Successfully added new");
         return "redirect:/product";
     }
 
     @GetMapping("/edit")
-    public String editForm (@RequestParam int id, Model model){
-        model.addAttribute("product",productService.findById(id));
+    public String editForm(@RequestParam int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
         return "edit";
     }
 
     @PostMapping("/update")
-    public String editProduct (@ModelAttribute Product product,RedirectAttributes redirectAttributes){
+    public String editProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         productService.update(product);
-        redirectAttributes.addFlashAttribute("message","Successful update ");
+        redirectAttributes.addFlashAttribute("message", "Successful update ");
         return "redirect:/product";
     }
 
     @GetMapping("/delete")
-    public String deleteForm(@RequestParam int id,Model model){
-        model.addAttribute("product",productService.findById(id));
-        return "delete";
-    }
-
-    @PostMapping("/delete")
-    public String deleteProduct(Product product,RedirectAttributes redirectAttributes){
+    public String deleteForm(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        Product product = productService.findById(id);
         productService.remove(product);
-        redirectAttributes.addFlashAttribute("message","Successful delete ");
+        redirectAttributes.addFlashAttribute("message", "Successful delete ");
         return "redirect:/product";
     }
+
+    //    @PostMapping("/delete")
+//    public String deleteProduct(Product product,RedirectAttributes redirectAttributes){
+//        productService.remove(product);
+//        redirectAttributes.addFlashAttribute("message","Successful delete ");
+//        return "redirect:/product";
+//    }
     @GetMapping("/view")
-    public String view(@RequestParam int id,Model model){
-        model.addAttribute("product",productService.findById(id));
+    public String view(@RequestParam int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
         return "view";
     }
 
