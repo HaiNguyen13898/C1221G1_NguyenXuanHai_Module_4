@@ -70,14 +70,14 @@ public class ProductController {
         return "view";
     }
 
-//    @GetMapping("/search")
-//    public String searchByName(@RequestParam String nameProduct,Model model){
-//        List<Product> productList = productService.searchByName(nameProduct);
-//        if (productList.isEmpty()) {
-//            model.addAttribute("message", "Not found any product");
-//        } else {
-//            model.addAttribute("productList", productList);
-//        }
-//        return "list";
-//    }
+    @GetMapping("/search")
+    public String searchByName(@RequestParam String nameProduct,Model model){
+        List<Product> productList = productService.searchByName(nameProduct);
+        if (productList.isEmpty()) {
+            model.addAttribute("message", "Not found any product");
+        } else {
+            model.addAttribute("productList", productList);
+        }
+        return "list";
+    }
 }

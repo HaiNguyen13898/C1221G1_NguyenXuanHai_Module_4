@@ -10,6 +10,6 @@ public interface IProductService {
     Product findById(int id);
     void update( Product product);
     void remove(Product product);
-//    List<Product> searchByName(String nameProduct);
+    List<Product> searchByName(String nameProduct);
 
 }

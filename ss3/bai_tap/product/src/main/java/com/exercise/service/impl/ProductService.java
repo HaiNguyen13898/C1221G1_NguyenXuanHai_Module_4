@@ -47,14 +47,8 @@ public class ProductService implements IProductService {
         productRepository.remove(product);
     }
 
-//    @Override
-//    public List<Product> searchByName(String nameProduct) {
-//        List<Product> productList = new ArrayList<>();
-//        for (Product product : productMap.values()) {
-//            if (product.getProductName().toLowerCase().contains(nameProduct)) {
-//                productList.add(product);
-//            }
-//        }
-//        return productList;
-//    }
+    @Override
+    public List<Product> searchByName(String nameProduct) {
+        return productRepository.searchByName(nameProduct);
+    }
 }

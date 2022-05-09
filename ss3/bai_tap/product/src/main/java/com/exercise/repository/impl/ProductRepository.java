@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 @Repository
@@ -28,7 +30,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product findById(int id) {
-        return BaseRepository.entityManager.find(Product.class, id);    }
+        return BaseRepository.entityManager.find(Product.class, id);
+    }
 
     @Override
     public void update(Product product) {
@@ -47,4 +50,18 @@ public class ProductRepository implements IProductRepository {
         entityTransaction.commit();
 
     }
+
+    @Override
+    public List<Product> searchByName(String nameProduct) {
+        List<Product> productList = new ArrayList<>();
+        for (Product p : findAll()) {
+            if (p.getProductName().toLowerCase().contains(nameProduct)){
+                productList.add(p);
+            }
+        }
+        return productList;
+    }
+
+
 }
+
