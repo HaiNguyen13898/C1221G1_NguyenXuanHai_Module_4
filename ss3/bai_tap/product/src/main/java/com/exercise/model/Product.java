@@ -1,6 +1,12 @@
 package com.exercise.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "product")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String productName;
     private Double price;
@@ -12,6 +18,13 @@ public class Product {
 
     public Product(int id, String productName, Double price, String description, String producer) {
         this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.description = description;
+        this.producer = producer;
+    }
+
+    public Product(String productName, Double price, String description, String producer) {
         this.productName = productName;
         this.price = price;
         this.description = description;
