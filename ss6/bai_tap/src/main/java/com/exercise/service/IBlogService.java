@@ -10,4 +10,5 @@ public interface IBlogService {
     Blog findById(int id);
     void update(Blog blog);
     void remove(Blog blog);
+    List<Blog> searchByName (String name);
 }

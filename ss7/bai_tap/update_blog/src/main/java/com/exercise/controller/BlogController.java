@@ -36,7 +36,8 @@ public class BlogController {
     @GetMapping(value = "/create")
     public String showCreateForm(Model model) {
         model.addAttribute("blog", new Blog());
-        model.addAttribute("category", new Category());
+        model.addAttribute("categoryList",categoryService.findAll());
+
         return "create";
     }
 
@@ -51,6 +52,7 @@ public class BlogController {
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model model) {
         model.addAttribute("blog", blogService.findById(id));
+        model.addAttribute("categoryList",categoryService.findAll());
         return "edit";
     }
 
@@ -68,7 +70,6 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("message", "Successful delete ");
         return "redirect:/blog";
     }
-
 
 
 }

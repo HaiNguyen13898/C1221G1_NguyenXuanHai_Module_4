@@ -60,6 +60,15 @@ public class BlogController {
         return "redirect:/blogs";
     }
 
-
+    @GetMapping("/search")
+    public String searchByName(@RequestParam String name,Model model){
+        List<Blog> blogList = blogService.searchByName(name);
+        if (blogList.isEmpty()) {
+            model.addAttribute("message", "Not found any product");
+        } else {
+            model.addAttribute("blogList", blogList);
+        }
+        return "list";
+    }
 
 }

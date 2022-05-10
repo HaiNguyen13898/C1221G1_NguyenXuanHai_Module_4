@@ -28,6 +28,15 @@
                 </tr>
 
                 <tr>
+                    <th>Category</th>
+                    <td>
+                        <select th:field="*{category}">
+                            <option th:each="category : ${categoryList}" th:value="${category.id}"  th:text="${category.nameCategory}" ></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
                     <td></td>
                     <td><input type="submit"value="Update"></td>
                 </tr>

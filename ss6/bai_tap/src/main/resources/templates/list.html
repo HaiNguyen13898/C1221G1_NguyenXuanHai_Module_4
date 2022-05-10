@@ -16,9 +16,9 @@
 
     <p th:text="${message}" style="color: red"></p>
 
-    <form th:action="@{/blogs/search}" method="get">
-        <label>Search by name product: </label>
-        <input type="text" name="nameProduct">
+    <form th:action="@{/search}" method="get">
+        <label>Search by name: </label>
+        <input type="text" name="name">
         <input type="submit" value="Search">
     </form>
 

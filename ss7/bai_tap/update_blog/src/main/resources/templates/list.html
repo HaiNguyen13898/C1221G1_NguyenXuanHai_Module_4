@@ -38,7 +38,7 @@
         <tr th:each="blogs: ${blogList}">
             <td th:text="${blogs.nameBlog}"></td>
             <td th:text="${blogs.contentBlog}"></td>
-            <td th:text="${blogs.category}"></td>
+            <td th:text="${blogs.category.nameCategory}"></td>
             <td>
                 <a th:href="@{/edit(id=${blogs.id})}">edit</a>
             </td>

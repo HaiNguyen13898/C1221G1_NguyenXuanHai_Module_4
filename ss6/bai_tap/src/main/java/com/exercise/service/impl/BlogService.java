@@ -4,6 +4,7 @@ import com.exercise.model.Blog;
 import com.exercise.repository.IBlogRepository;
 import com.exercise.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +37,12 @@ public class BlogService implements IBlogService {
     @Override
     public void remove(Blog blog) {
         this.blogRepository.delete(blog);
+    }
+
+
+    @Override
+    public List<Blog> searchByName(String name) {
+
+        return this.blogRepository.searchByName("%"+name +"%");
     }
 }

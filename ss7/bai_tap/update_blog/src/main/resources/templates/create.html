@@ -28,11 +28,8 @@
                 <tr>
                     <th>Category</th>
                     <td>
-                        <select th:object="${category}">
-                            <option th:value="" th:field="*{nameCategory}"></option>
-                            <option th:value="" th:field="*{nameCategory}" ></option>
-                            <option th:value="" th:field="*{nameCategory}"></option>
-                            <option th:value="" th:field="*{nameCategory}"></option>
+                        <select th:field="*{category}">
+                            <option th:each="category : ${categoryList}" th:value="${category.id}"  th:text="${category.nameCategory}" ></option>
                         </select>
                     </td>
                 </tr>
