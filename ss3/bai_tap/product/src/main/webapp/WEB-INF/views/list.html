@@ -16,14 +16,14 @@
 
     <p th:text="${message}" style="color: red"></p>
 
-    <form action="/product/search" method="get">
+    <form th:action="@{/product/search}" method="get">
         <label>Search by name product: </label>
         <input type="text" name="nameProduct">
         <input type="submit" value="Search">
     </form>
     <br>
 
-    <table  class="table" border="1" >
+    <table class="table" border="1">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Name Product</th>
@@ -41,14 +41,52 @@
             <td th:text="${products.description}"></td>
             <td th:text="${products.producer}"></td>
             <td><a th:href="@{/product/edit(id=${products.id})}">edit</a></td>
-            <td><a th:href="@{/product/delete(id=${products.id})}"> delete</a></td>
+            <td>
+<!--                <button type="button"class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"-->
+<!--                        th:onclick="deleteProduct(${products.id})">-->
+<!--                    Delete-->
+<!--                </button>-->
+                  <a th:href="@{/product/delete(id=${products.id})}"> delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
 
 
+<!--    <form th:action="@{/delete}" method="get">-->
+<!--        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
+<!--             aria-hidden="true">-->
+<!--            <div class="modal-dialog" role="document">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>-->
+<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                            <span aria-hidden="true">&times;</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <input type="hidden" name="id" id="deleteProduct">-->
+<!--                        Bạn có chắc muốn xóa sản phẩm? <br>-->
+<!--                        <p style="color: red">Không thể hoàn tác</p>-->
+<!--&lt;!&ndash;                        <%&#45;&#45; Mã sản phẩm: <p id="id"></p>&#45;&#45;%>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <%&#45;&#45; Tên sản phẩm: <p id="nameProduct"></p>&#45;&#45;%>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                        <button type="submit" class="btn btn-primary">Delete</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
 
-
+<!--    <script>-->
+<!--        function deleteProduct(id) {-->
+<!--            document.getElementById("deleteProduct").value = id;-->
+<!--            // document.getElementById("idProduct").innerText= id;-->
+<!--            // document.getElementById("nameProduct").innerText= nameProduct;-->
+<!--        }-->
+<!--    </script>-->
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

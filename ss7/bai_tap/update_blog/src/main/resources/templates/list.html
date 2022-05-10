@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<center>
+    <h2>Blog list</h2>
+    <p>
+        <a th:href="@{/create}">Create blog </a>
+    </p>
+
+    <p th:text="${message}" style="color: red"></p>
+
+    <form th:action="@{/blogs/search}" method="get">
+        <label>Search by name product: </label>
+        <input type="text" name="nameProduct">
+        <input type="submit" value="Search">
+    </form>
+
+    <br>
+
+    <table class="table" border="1">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name Blog</th>
+            <th scope="col">Content Blog</th>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blogs: ${blogList}">
+            <td th:text="${blogs.nameBlog}"></td>
+            <td th:text="${blogs.contentBlog}"></td>
+            <td th:text="${blogs.category}"></td>
+            <td>
+                <a th:href="@{/edit(id=${blogs.id})}">edit</a>
+            </td>
+            <td>
+                  <a th:href="@{/delete(id=${blogs.id})}"> delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</center>
+</body>
+</html>

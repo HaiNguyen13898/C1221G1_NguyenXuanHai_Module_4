@@ -58,12 +58,7 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    //    @PostMapping("/delete")
-//    public String deleteProduct(Product product,RedirectAttributes redirectAttributes){
-//        productService.remove(product);
-//        redirectAttributes.addFlashAttribute("message","Successful delete ");
-//        return "redirect:/product";
-//    }
+
     @GetMapping("/view")
     public String view(@RequestParam int id, Model model) {
         model.addAttribute("product", productService.findById(id));
