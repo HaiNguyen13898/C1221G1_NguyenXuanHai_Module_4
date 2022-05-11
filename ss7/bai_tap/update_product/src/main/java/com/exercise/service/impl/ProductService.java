@@ -4,6 +4,8 @@ import com.exercise.model.Product;
 import com.exercise.repository.IProductRepository;
 import com.exercise.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +17,10 @@ public class ProductService implements IProductService {
     private IProductRepository productRepository;
 
 
-    @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
-    }
+//    @Override
+//    public List<Product> findAll() {
+//        return productRepository.findAll();
+//    }
 
     @Override
     public void save(Product product) {
@@ -38,6 +40,11 @@ public class ProductService implements IProductService {
     @Override
     public void remove(Product product) {
         productRepository.delete(product);
+    }
+
+    @Override
+    public Page<Product> findAllsearchByName(String name, Pageable pageable) {
+        return productRepository.findAllByProductNameContaining(name, pageable );
     }
 
 //    @Override

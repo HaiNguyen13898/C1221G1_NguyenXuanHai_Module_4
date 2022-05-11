@@ -4,12 +4,15 @@ import com.exercise.model.Product;
 import com.exercise.service.IProductService;
 import com.exercise.service.ITypeProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/product")
@@ -21,9 +24,12 @@ public class ProductController {
     private ITypeProductService typeProductService;
 
     @GetMapping("")
-    public String showList(Model model) {
-        List<Product> productList = productService.findAll();
-        model.addAttribute("productList", productList);
+    public String showList(Model model,
+                           @PageableDefault(value = 2) Pageable pageable
+            , @RequestParam Optional<String> key) {
+        String keyVal = key.orElse("");
+        model.addAttribute("keyVal", keyVal);
+        model.addAttribute("productList", productService.findAllsearchByName(keyVal, pageable));
         return "list";
     }
 
