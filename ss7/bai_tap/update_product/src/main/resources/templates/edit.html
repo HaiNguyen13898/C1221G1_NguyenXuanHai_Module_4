@@ -28,11 +28,22 @@
                 </tr>
                 <tr>
                     <th>Description</th>
-                    <td><input type="text" th:field="*{description}"></td>
+                    <td><input type="text" th:field="*{descriptions}"></td>
                 </tr>
                 <tr>
                     <th>Producer</th>
                     <td><input type="text" th:field="*{producer}"></td>
+                </tr>
+                <tr>
+                    <th>Product type</th>
+                    <td>
+                        <select th:field="*{typeProduct}" >
+                            <option  th:each="p : ${typeProduct}"
+                                     th:value="${p.id}"
+                                     th:text="${p.typeName}">
+                            </option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>

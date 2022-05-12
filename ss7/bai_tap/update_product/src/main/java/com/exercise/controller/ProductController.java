@@ -25,17 +25,19 @@ public class ProductController {
 
     @GetMapping("")
     public String showList(Model model,
-                           @PageableDefault(value = 2) Pageable pageable
-            , @RequestParam Optional<String> key) {
+                           @PageableDefault(value = 4) Pageable pageable
+            , @RequestParam Optional<String> key, @RequestParam Optional<String> des){
         String keyVal = key.orElse("");
+        String desVal = des.orElse("");
+        model.addAttribute("desVal", desVal);
         model.addAttribute("keyVal", keyVal);
-        model.addAttribute("productList", productService.findAllsearchByName(keyVal, pageable));
+        model.addAttribute("productList", productService.findAllsearchByName(keyVal,desVal, pageable));
         return "list";
     }
 
     @GetMapping(value = "/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("productType", typeProductService.findAll());
+        model.addAttribute("typeProducts", typeProductService.findAll());
         model.addAttribute("product", new Product());
         return "/create";
     }
@@ -50,7 +52,7 @@ public class ProductController {
 
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model model) {
-        model.addAttribute("productType", typeProductService.findAll());
+        model.addAttribute("typeProduct", typeProductService.findAll());
         model.addAttribute("product", productService.findById(id));
         return "edit";
     }

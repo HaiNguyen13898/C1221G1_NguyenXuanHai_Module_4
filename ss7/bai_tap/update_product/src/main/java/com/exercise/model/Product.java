@@ -10,14 +10,22 @@ public class Product {
     private int id;
     private String productName;
     private Double price;
-    private String description;
+    private String descriptions;
     private String producer;
 
     public Product() {
     }
 
+
+    public Product(String productName, Double price, String description, String producer) {
+        this.productName = productName;
+        this.price = price;
+        this.descriptions = description;
+        this.producer = producer;
+    }
+
     @ManyToOne
-    @JoinColumn(name="id_type_product", referencedColumnName = "id")
+    @JoinColumn(name = "id_TP", referencedColumnName = "id")
     private TypeProduct typeProduct;
 
     public TypeProduct getTypeProduct() {
@@ -25,23 +33,6 @@ public class Product {
     }
 
     public void setTypeProduct(TypeProduct typeProduct) {
-        this.typeProduct = typeProduct;
-    }
-
-    public Product(String productName, Double price, String description, String producer, TypeProduct typeProduct) {
-        this.productName = productName;
-        this.price = price;
-        this.description = description;
-        this.producer = producer;
-        this.typeProduct = typeProduct;
-    }
-
-    public Product(int id, String productName, Double price, String description, String producer, TypeProduct typeProduct) {
-        this.id = id;
-        this.productName = productName;
-        this.price = price;
-        this.description = description;
-        this.producer = producer;
         this.typeProduct = typeProduct;
     }
 
@@ -69,12 +60,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptions() {
+        return descriptions;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
     }
 
     public String getProducer() {

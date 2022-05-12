@@ -17,8 +17,8 @@
     <p th:text="${message}" style="color: red"></p>
 
     <form action="/product">
-        <label>Search by name product: </label>
-        <input type="text" name="key">
+        <input type="text"  name="key">
+        <input type="text"  name ="des">
         <input type="submit" value="Search">
     </form>
     <br>
@@ -41,7 +41,7 @@
                 <a th:text="${products.productName}" th:href="@{/product/view(id=${products.id})}"></a>
             </td>
             <td th:text="${products.price}"></td>
-            <td th:text="${products.description}"></td>
+            <td th:text="${products.descriptions}"></td>
             <td th:text="${products.producer}"></td>
 <!--            <td>-->
 <!--                <span th:if="${products.typeProduct}" th:text="${products.typeProduct.typeName}"></span>-->
@@ -55,7 +55,7 @@
     </table>
     <div>
         <a th:if="${productList.hasPrevious()}"
-           th:href="@{/product(page=${productList.number - 1}, keyword=${keyVal})}">
+           th:href="@{/product(page=${productList.number - 1}, keyword=${keyVal},  keyword=${desVal})}">
             Previous</a>
 
         <span th:text="${productList.number + 1}"></span>
@@ -63,7 +63,7 @@
         <span th:text="${productList.totalPages}"></span>
 
         <a th:if="${productList.hasNext()}"
-           th:href="@{/product(page=${productList.number + 1},  keyword=${keyVal})}">
+           th:href="@{/product(page=${productList.number + 1},  keyword=${keyVal},keyword=${desVal})}">
             Next
         </a>
     </div>
