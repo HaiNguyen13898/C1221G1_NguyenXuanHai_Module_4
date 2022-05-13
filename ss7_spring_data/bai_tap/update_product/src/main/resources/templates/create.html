@@ -11,28 +11,32 @@
         <a th:href="@{/product}"> Back to Product List</a>
     </h2>
 
-    <form th:action="@{/product/save}" th:object="${product}" method="post">
+    <form th:action="@{/product/save}" th:object="${productDto}" method="post">
         <fieldset>
             <legend>Form create product</legend>
             <table border="1">
                 <tr>
                     <th>Product Name</th>
                     <td><input type="text" th:field="*{productName}"></td>
+                    <td> <p style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"> </p></td>
                 </tr>
                 <tr>
                     <th>Price</th>
                     <td><input type="text" th:field="*{price}"></td>
+                    <td> <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"> </p></td>
                 </tr>
                 <tr>
                     <th>Description</th>
                     <td><input type="text" th:field="*{descriptions}"></td>
+                    <td> <p style="color: red" th:if="${#fields.hasErrors('descriptions')}" th:errors="*{descriptions}"> </p></td>
                 </tr>
                 <tr>
                     <th>Producer</th>
                     <td><input type="text" th:field="*{producer}"></td>
+                    <td> <p style="color: red" th:if="${#fields.hasErrors('producer')}" th:errors="*{producer}"> </p></td>
                 </tr>
 
-                <tr>      <tr>
+                <tr><tr>
                 <th>Product type</th>
                 <td>
                     <select th:field="*{typeProduct}" >

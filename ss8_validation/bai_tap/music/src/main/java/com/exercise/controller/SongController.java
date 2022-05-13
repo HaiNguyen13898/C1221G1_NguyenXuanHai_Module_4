@@ -5,6 +5,8 @@ import com.exercise.model.Song;
 import com.exercise.service.ISongService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +20,8 @@ public class SongController {
     private ISongService songService;
 
     @GetMapping("")
-    public String listSong(Model model) {
-        model.addAttribute("song", this.songService.findAll());
+    public String listSong(Model model, @PageableDefault(value = 2) Pageable pageable) {
+        model.addAttribute("song", this.songService.findAll(pageable));
         return "list";
     }
 

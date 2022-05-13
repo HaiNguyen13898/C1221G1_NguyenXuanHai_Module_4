@@ -4,6 +4,8 @@ import com.exercise.model.Song;
 import com.exercise.repository.ISongRepository;
 import com.exercise.service.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +18,15 @@ public class SongService implements ISongService {
     private ISongRepository songRepository;
 
 
+    //    @Override
+//    public List<Song> findAll() {
+//        return songRepository.findAll();
+//    }
     @Override
-    public List<Song> findAll() {
-        return songRepository.findAll();
+    public Page<Song> findAll(Pageable pageable) {
+        return songRepository.findAll(pageable);
     }
+
 
     @Override
     public void save(Song song) {
@@ -35,4 +42,6 @@ public class SongService implements ISongService {
     public Song findById(int id) {
         return songRepository.findById(id).orElse(null);
     }
+
+
 }

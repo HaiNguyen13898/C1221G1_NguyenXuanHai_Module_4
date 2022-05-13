@@ -1,13 +1,17 @@
 package com.exercise.controller;
 
+import com.exercise.dto.ProductDto;
 import com.exercise.model.Product;
 import com.exercise.service.IProductService;
 import com.exercise.service.ITypeProductService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,28 +30,38 @@ public class ProductController {
     @GetMapping("")
     public String showList(Model model,
                            @PageableDefault(value = 4) Pageable pageable
-            , @RequestParam Optional<String> key, @RequestParam Optional<String> des){
+            , @RequestParam Optional<String> key, @RequestParam Optional<String> des) {
         String keyVal = key.orElse("");
         String desVal = des.orElse("");
         model.addAttribute("desVal", desVal);
         model.addAttribute("keyVal", keyVal);
-        model.addAttribute("productList", productService.findAllsearchByName(keyVal,desVal, pageable));
+        model.addAttribute("productList", productService.findAllsearchByName(keyVal, desVal, pageable));
         return "list";
     }
 
     @GetMapping(value = "/create")
     public String showCreateForm(Model model) {
         model.addAttribute("typeProducts", typeProductService.findAll());
-        model.addAttribute("product", new Product());
+        model.addAttribute("productDto", new ProductDto());
         return "/create";
     }
 
 
     @PostMapping(value = "/save")
-    public String save(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
-        productService.save(product);
-        redirectAttributes.addFlashAttribute("message", "Successfully added new");
-        return "redirect:/product";
+    public String save(@ModelAttribute @Validated ProductDto productDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes, Model model) {
+
+        new ProductDto().validate(productDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("typeProducts", typeProductService.findAll());
+            return "/create";
+        } else {
+            Product product = new Product();
+            BeanUtils.copyProperties(productDto, product);
+            productService.save(product);
+            redirectAttributes.addFlashAttribute("message", "Successfully added new");
+            return "redirect:/product";
+        }
     }
 
     @GetMapping("/edit")
@@ -79,14 +93,5 @@ public class ProductController {
         return "view";
     }
 
-//    @GetMapping("/search")
-//    public String searchByName(@RequestParam String nameProduct,Model model){
-//        List<Product> productList = productService.searchByName(nameProduct);
-//        if (productList.isEmpty()) {
-//            model.addAttribute("message", "Not found any product");
-//        } else {
-//            model.addAttribute("productList", productList);
-//        }
-//        return "list";
-//    }
+
 }
