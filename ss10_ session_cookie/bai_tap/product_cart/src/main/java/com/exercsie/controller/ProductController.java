@@ -42,6 +42,22 @@ public class ProductController {
             return "redirect:/shopping-cart";
         }
         cart.addProduct(productOptional.get());
-        return "redirect:/shop";
+        return "redirect:/shopping-cart";
+    }
+
+    @GetMapping("/sub")
+    public String subProduct(@RequestParam Long id,
+                             @SessionAttribute("cart") Cart cart,
+                             @RequestParam("action") String action)
+                              {
+        Optional<Product> productOptional = productService.findById(id);
+        if(productOptional.isPresent()) {
+            return "/error.404";
+        } if (action.equals("cut")) {
+            cart.subProduct(productOptional.get());
+            return "redirect:/shopping-cart";
+        }
+        cart.subProduct(productOptional.get());
+        return "redirect:/shopping-cart";
     }
 }
