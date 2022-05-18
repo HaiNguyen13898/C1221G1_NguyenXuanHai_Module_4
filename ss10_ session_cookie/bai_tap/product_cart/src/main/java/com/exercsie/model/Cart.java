@@ -17,6 +17,8 @@ public class Cart {
         return products;
     }
 
+
+
     private boolean checkItemInCart(Product product){
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             if(entry.getKey().getId().equals(product.getId())){
@@ -56,6 +58,8 @@ public class Cart {
     public Integer countItemQuantity(){
         return products.size();
     }
+
+
 
     public Float countTotalPayment(){
         float payment = 0;

@@ -67,15 +67,29 @@ public class ProductController {
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model model) {
         model.addAttribute("typeProduct", typeProductService.findAll());
-        model.addAttribute("product", productService.findById(id));
+        Product product = productService.findById(id);
+        ProductDto productDto = new ProductDto();
+        BeanUtils.copyProperties(product, productDto);
+        model.addAttribute("productDto", productDto);
         return "edit";
     }
 
     @PostMapping("/update")
-    public String editProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
-        productService.update(product);
-        redirectAttributes.addFlashAttribute("message", "Successful update ");
-        return "redirect:/product";
+    public String editProduct(@ModelAttribute @Validated ProductDto productDto,
+                              BindingResult bindingResult, Model model
+            ,RedirectAttributes redirectAttributes) {
+
+        new ProductDto().validate(productDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("typeProduct", typeProductService.findAll());
+            return "edit";
+        } else {
+            Product product = new Product();
+            BeanUtils.copyProperties(productDto, product);
+            productService.update(product);
+            redirectAttributes.addFlashAttribute("message", "Successful update ");
+            return "redirect:/product";
+        }
     }
 
     @GetMapping("/delete")

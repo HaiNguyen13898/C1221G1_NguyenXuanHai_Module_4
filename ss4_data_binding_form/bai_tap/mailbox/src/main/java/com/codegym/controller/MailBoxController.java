@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MailBoxController {
 
-    @PostMapping("/create")
+    @GetMapping("/form")
     public String showForm(@ModelAttribute Mail mail, Model model) {
         model.addAttribute("mail", mail);
         return "display";
     }
 
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     public String createNewMailBox(Model model) {
         model.addAttribute("mail", new Mail());
         model.addAttribute("languages", new String[]{"English", "Vietnamese", "Japanese", "Chinese"});

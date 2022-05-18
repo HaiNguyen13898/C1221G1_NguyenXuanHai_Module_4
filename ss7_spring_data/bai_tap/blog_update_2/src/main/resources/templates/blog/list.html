@@ -22,32 +22,32 @@
         <input type="submit" value="Search">
     </form>
     <br>
-
-    <table class="table" border="1">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Name Blog</th>
-            <th scope="col">Content Blog</th>
-            <th scope="col">Category</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="blogs: ${blogList}">
-            <td th:text="${blogs.nameBlog}"></td>
-            <td th:text="${blogs.contentBlog}"></td>
-            <td th:text="${blogs.category.nameCategory}"></td>
-            <td>
-                <a th:href="@{/blogUD/edit(id=${blogs.id})}">edit</a>
-            </td>
-            <td>
-                <a th:href="@{/blogUD/delete(id=${blogs.id})}"> delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div class="table-responsive-md">
+        <table class="table" border="1">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name Blog</th>
+                <th scope="col">Content Blog</th>
+                <th scope="col">Category</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="blogs: ${blogList}">
+                <td th:text="${blogs.nameBlog}"></td>
+                <td th:text="${blogs.contentBlog}"></td>
+                <td th:text="${blogs.category.nameCategory}"></td>
+                <td>
+                    <a th:href="@{/blogUD/edit(id=${blogs.id})}">edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/blogUD/delete(id=${blogs.id})}"> delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div>
         <a th:if="${blogList.hasPrevious()}"
            th:href="@{/blogUD(page=${blogList.number - 1}, keyword=${keywordVal})}">
@@ -60,7 +60,6 @@
             Next
         </a>
     </div>
-
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
