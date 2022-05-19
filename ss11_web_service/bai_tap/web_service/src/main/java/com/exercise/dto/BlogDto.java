@@ -5,7 +5,6 @@ import com.exercise.model.Category;
 import javax.validation.constraints.NotBlank;
 public class BlogDto {
     private int id;
-
     @NotBlank
     private String nameBlog;
     @NotBlank

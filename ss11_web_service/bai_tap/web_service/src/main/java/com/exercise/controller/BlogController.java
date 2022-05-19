@@ -4,11 +4,14 @@ import com.exercise.dto.BlogDto;
 import com.exercise.model.Blog;
 import com.exercise.service.IBlogService;
 import com.exercise.service.ICategoryService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,8 +32,8 @@ public class BlogController {
                            @PageableDefault(value = 2) Pageable pageable,
                            @RequestParam Optional<String> keyword) {
         String keywordVal = keyword.orElse("");
-        model.addAttribute("blogList", blogService.findAndSearchByName(keywordVal,pageable));
-        model.addAttribute("keywordVal",keywordVal);
+        model.addAttribute("blogList", blogService.findAndSearchByName(keywordVal, pageable));
+        model.addAttribute("keywordVal", keywordVal);
         return "/list";
     }
 
@@ -43,13 +46,18 @@ public class BlogController {
 
 
     @PostMapping(value = "/save")
-    public String save(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes) {
-
-        blogService.save(blog);
-        redirectAttributes.addFlashAttribute("message", "Successfully added new");
-        return "redirect:/blogUD";
+    public String save(@ModelAttribute @Validated BlogDto blogDto,BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
+            return "create";
+        } else {
+            Blog blog = new Blog();
+            BeanUtils.copyProperties(blogDto, blog);
+            blogService.save(blog);
+            redirectAttributes.addFlashAttribute("message", "Successfully added new");
+            return "redirect:/blogUD";
+        }
     }
-
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model model) {
         model.addAttribute("blog", blogService.findById(id));

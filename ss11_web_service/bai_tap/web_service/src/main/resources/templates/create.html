@@ -18,12 +18,15 @@
                 <tr>
                     <th>Blog Name</th>
                     <td><input type="text" th:field="*{nameBlog}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('nameBlog')}" th:errors="*{nameBlog}"></p></td>
                 </tr>
                 <tr>
                     <th>Content</th>
                     <td>
                         <textarea th:field="*{contentBlog}" cols="40" rows="7"></textarea>
                     </td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('contentBlog')}" th:errors="*{contentBlog}"></p></td>
+
                 </tr>
                 <tr>
                     <th>Category</th>

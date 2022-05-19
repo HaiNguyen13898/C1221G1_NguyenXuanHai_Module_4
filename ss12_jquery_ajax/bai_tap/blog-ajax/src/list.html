@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list blog</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<center>
+    <div>
+        <div>
+            <input type="text" id="keyword">
+        </div>
+        <div>
+            <button id="btnSearch">Search</button>
+        </div>
+    </div>
+
+    <h2>List blog</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Name Blog</th>
+            <th>Content Blog</th>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody id="bodyBlog">
+
+        </tbody>
+    </table>
+</center>
+
+<script>
+    let curPage=0;
+    function getListBlog(numberPage,nameSearch) {
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET", //GET, DELETE, PUT...
+            url: "http://localhost:8080/blogRest/listBlog?page="+numberPage+"&name="+nameSearch,
+            success: function (resultSuccess) {
+                console.log(resultSuccess);
+                let outHTML = "";
+                let count = 1
+                for (let blogObj of resultSuccess.content) {
+                    outHTML += `<tr>
+                    <td>${count++}</td>
+                    <td>${blogObj.nameBlog}</td>
+                    <td>${blogObj.contentBlog}</td>
+                    <td>${blogObj.category.nameCategory}</td>
+                    <td>
+                        <a href="#">Update</a>
+                    </td>
+                    <td>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>`
+                }
+                $("#bodyBlog").html(outHTML)
+            },
+            error: function (resultError) {
+            }
+        });
+    }
+
+    getListBlog(curPage,"");
+
+
+
+</script>
+
+
+</body>
+</html>
