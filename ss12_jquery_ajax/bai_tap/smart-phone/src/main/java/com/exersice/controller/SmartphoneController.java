@@ -1,13 +1,14 @@
-package com.example.controller;
+package com.exersice.controller;
 
-import com.example.model.Smartphone;
-import com.example.service.ISmartphoneService;
+import com.exersice.model.Smartphone;
+import com.exersice.service.ISmartphoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Optional;
 
 @CrossOrigin
@@ -29,7 +30,7 @@ public class SmartphoneController {
 
     @GetMapping("/list")
     public ModelAndView getAllSmartphonePage() {
-        ModelAndView modelAndView = new ModelAndView("list");
+        ModelAndView modelAndView = new ModelAndView("/phones/list");
         modelAndView.addObject("smartphones", smartphoneService.findAll());
         return modelAndView;
     }
@@ -42,5 +43,22 @@ public class SmartphoneController {
         }
         smartphoneService.remove(id);
         return new ResponseEntity<>(smartphoneOptional.get(), HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView editSmartphoneForm(@PathVariable Long id){
+        Optional<Smartphone> smartphone = this.smartphoneService.findById(id);
+        if(!smartphone.isPresent()){
+            return new ModelAndView("/index");
+        }
+        ModelAndView modelAndView = new ModelAndView("/phones/edit");
+        modelAndView.addObject(smartphone.get());
+        return modelAndView;
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Smartphone> editSmartphone(@PathVariable Integer id,@RequestBody Smartphone editSmartPhone){
+        this.smartphoneService.save(editSmartPhone);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

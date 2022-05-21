@@ -47,8 +47,9 @@ public class BlogController {
 
     @PostMapping(value = "/save")
     public String save(@ModelAttribute @Validated BlogDto blogDto,BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+                       RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("categoryList", categoryService.findAll());
             return "create";
         } else {
             Blog blog = new Blog();

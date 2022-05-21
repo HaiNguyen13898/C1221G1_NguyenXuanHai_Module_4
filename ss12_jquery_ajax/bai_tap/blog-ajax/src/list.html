@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>list blog</title>
     <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/mdb.min.css">
 </head>
 <body>
 <center>
     <div>
         <div>
-            <input type="text" id="keyword">
+            <input type="text" id="key-search">
         </div>
         <div>
             <button id="btnSearch">Search</button>
@@ -32,18 +33,33 @@
 
         </tbody>
     </table>
+
+    <nav aria-label="..." class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" id="aPrevious">Previous</a>
+            </li>
+            <li class="page-item disabled" >
+                <a class="page-link" id="pageNumber">1/2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" id="aNext">Next</a>
+            </li>
+        </ul>
+    </nav>
 </center>
 
+
 <script>
-    let curPage=0;
-    function getListBlog(numberPage,nameSearch) {
+
+    // function getListBlog(name, page) {
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             type: "GET", //GET, DELETE, PUT...
-            url: "http://localhost:8080/blogRest/listBlog?page="+numberPage+"&name="+nameSearch,
+            url: "http://localhost:8080/blogRest/listBlog",
             success: function (resultSuccess) {
                 console.log(resultSuccess);
                 let outHTML = "";
@@ -65,16 +81,100 @@
                 $("#bodyBlog").html(outHTML)
             },
             error: function (resultError) {
+                alert("Hệ thống đang nâng cấp")
             }
         });
-    }
+    // }
 
-    getListBlog(curPage,"");
+    // getListBlog("..");
+    //
+    // $(document).ready(function () {
+    //     $("#btnSearch").click(function () {
+    //         getListBlog($("#key-search").val())
+    //     })
+    // })
 
 
+    // Search by name
+    $("#btnSearch").click(function (){
+        let searchName = $("#key-search").val();
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET", //GET, DELETE, PUT...
+            url: "http://localhost:8080/blogRest/listBlog?name=" + searchName,
+            success: function (resultSuccess) {
+                console.log(resultSuccess);
+                let outHTML = "";
+                let count = 1
+                for (let blogObj of resultSuccess.content) {
+                    outHTML += `<tr>
+                    <td>${count++}</td>
+                    <td>${blogObj.nameBlog}</td>
+                    <td>${blogObj.contentBlog}</td>
+                    <td>${blogObj.category.nameCategory}</td>
+                    <td>
+                        <a href="#">Update</a>
+                    </td>
+                    <td>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>`
+                }
+                $("#bodyBlog").html(outHTML)
+                $("#key-search").val()
+            },
+            error: function (resultError) {
+                alert("Hệ thống đang nâng cấp")
+            }
+        });
+    })
+
+
+    //  Phân trang
+    // $("#aNext").click(function () {
+    //     let curPage=0;
+    //     let pageNumber = $("pageNumber").val();
+    //     $.ajax({
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         type: "GET", //GET, DELETE, PUT...
+    //         url: "http://localhost:8080/blogRest/listBlog?page=" + pageNumber,
+    //         success: function (resultSuccess) {
+    //             console.log(resultSuccess);
+    //             let outHTML = "";
+    //             let count = 1
+    //             for (let blogObj of resultSuccess.content) {
+    //                 outHTML += `<tr>
+    //                 <td>${count++}</td>
+    //                 <td>${blogObj.nameBlog}</td>
+    //                 <td>${blogObj.contentBlog}</td>
+    //                 <td>${blogObj.category.nameCategory}</td>
+    //                 <td>
+    //                     <a href="#">Update</a>
+    //                 </td>
+    //                 <td>
+    //                     <a href="#">Delete</a>
+    //                 </td>
+    //             </tr>`
+    //             }
+    //             $("#bodyBlog").html(outHTML)
+    //
+    //         },
+    //         error: function (resultError) {
+    //             alert("Hệ thống đang nâng cấp")
+    //         }
+    //     });
+    //     curPage++;
+    // })
 
 </script>
 
+<script src="js/mdb.min.js"></script>
 
 </body>
 </html>

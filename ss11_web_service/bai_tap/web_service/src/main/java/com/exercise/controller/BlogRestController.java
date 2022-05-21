@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -31,7 +30,7 @@ public class BlogRestController {
     private ICategoryService categoryService;
 
     @GetMapping(value = "/listBlog")
-    public ResponseEntity<Page<Blog>> getPageBlog(@PageableDefault(value = 10) Pageable pageable,
+    public ResponseEntity<Page<Blog>> getPageBlog(@PageableDefault(value = 4) Pageable pageable,
                                                   @RequestParam Optional<String> name) {
         String nameVal=name.orElse("");
         Page<Blog> blogPage = this.blogService.findAndSearchByName(nameVal,pageable);
