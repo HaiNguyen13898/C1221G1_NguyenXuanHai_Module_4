@@ -4,9 +4,13 @@ import com.exercise.model.serivces.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface IService {
 
-    Page<Service> findAllAndSearch (String name, String des, String area, Pageable pageable);
+    Page<Service> findAllAndSearch(String name, String area, String cost, Pageable pageable); // fail
+
+    Page<Service> findAll(Pageable pageable);
 
     void save(Service service);
 

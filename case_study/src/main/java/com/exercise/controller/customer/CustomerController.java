@@ -1,12 +1,13 @@
 package com.exercise.controller.customer;
 
 
-import com.exercise.dto.customer.CustomerDto;
+import com.exercise.dto.CustomerDto;
 import com.exercise.model.customer.Customer;
-import com.exercise.repository.customer.ICustomerTypeRepository;
 import com.exercise.service.customer.ICustomerService;
+import com.exercise.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -25,27 +26,34 @@ public class CustomerController {
     @Autowired
     ICustomerService customerService;
     @Autowired
-    ICustomerTypeRepository customerTypeRepository;
+    ICustomerTypeService customerTypeService;
 
-    @GetMapping("")
+    @GetMapping()
     public String showList(Model model,
                            @PageableDefault(value = 5) Pageable pageable,
                            @RequestParam Optional<String> name,
                            @RequestParam Optional<String> address,
-                           @RequestParam Optional<String> phone) {
-        String nameCus = name.orElse("");
-        String addressCus = address.orElse("");
-        String phoneCus = phone.orElse("");
-        model.addAttribute("nameCus", nameCus);
-        model.addAttribute("addressCus", addressCus);
-        model.addAttribute("phoneCus", phoneCus);
-        model.addAttribute("customer", customerService.findAllAndSearch(nameCus, addressCus, phoneCus, pageable));
+                           @RequestParam Optional<Integer> customerType) {
+        String nameVal = name.orElse("");
+        String addresss = address.orElse("");
+        int cusType = customerType.orElse(-1);
+        Page<Customer> customerPage = null;
+        if(cusType == -1) {
+            customerPage = customerService.findAll1(nameVal, addresss, pageable);
+        } else  {
+            customerPage = customerService.findAll2(nameVal, addresss, cusType, pageable);
+        }
+        model.addAttribute("nameVal", nameVal);
+        model.addAttribute("addresss", addresss);
+        model.addAttribute("cusType", cusType);
+        model.addAttribute("customerTypes", customerTypeService.findAll());
+        model.addAttribute("customer", customerPage);
         return "customer/list";
     }
 
     @GetMapping(value = "/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("customerType", customerTypeRepository.findAll());
+        model.addAttribute("customerType", customerTypeService.findAll());
         model.addAttribute("customerDto", new CustomerDto());
         return "/customer/create";
     }
@@ -57,7 +65,7 @@ public class CustomerController {
 
 //        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            model.addAttribute("customerType", customerTypeRepository.findAll());
+            model.addAttribute("customerType", customerTypeService.findAll());
             return "/customer/create";
         } else {
             Customer customer = new Customer();
@@ -70,7 +78,7 @@ public class CustomerController {
 
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model model) {
-        model.addAttribute("customerType", customerTypeRepository.findAll());
+        model.addAttribute("customerType", customerTypeService.findAll());
         Customer customer = customerService.findById(id);
         CustomerDto customerDto = new CustomerDto();
         BeanUtils.copyProperties(customer, customerDto);
@@ -85,7 +93,7 @@ public class CustomerController {
 
 //        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            model.addAttribute("customerType", customerTypeRepository.findAll());
+            model.addAttribute("customerType", customerTypeService.findAll());
             return "/customer/edit";
         } else {
             Customer customer = new Customer();

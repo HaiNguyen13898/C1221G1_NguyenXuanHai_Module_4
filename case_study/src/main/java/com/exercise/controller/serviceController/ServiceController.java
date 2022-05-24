@@ -1,8 +1,8 @@
 package com.exercise.controller.serviceController;
 
 
-import com.exercise.dto.customer.CustomerDto;
-import com.exercise.model.customer.Customer;
+import com.exercise.dto.ServiceDto;
+import com.exercise.model.serivces.Service;
 import com.exercise.service.services.IRentType;
 import com.exercise.service.services.IService;
 import com.exercise.service.services.IServiceType;
@@ -23,95 +23,69 @@ import java.util.Optional;
 @RequestMapping("/services")
 public class ServiceController {
     @Autowired
-    IService service;
+    IService iService;
 
     @Autowired
     IServiceType serviceType;
 
     @Autowired
     IRentType rentType;
-    @GetMapping("")
+
+    @GetMapping()
     public String showList(Model model,
-                           @PageableDefault(value = 5) Pageable pageable,
-                           @RequestParam Optional<String> name,
-                           @RequestParam Optional<String> des,
-                           @RequestParam Optional<String> area) {
-        String nameSV = name.orElse("");
-        String areas = area.orElse("");
-        String description = des.orElse("");
-        model.addAttribute("nameCus", nameSV);
-        model.addAttribute("addressCus", areas);
-        model.addAttribute("phoneCus", description);
-        model.addAttribute("services", service.findAllAndSearch(nameSV, areas, description, pageable));
+                           @PageableDefault(value = 3) Pageable pageable)
+//                           @RequestParam Optional<String> name,
+//                           @RequestParam Optional<String> des,
+//                           @RequestParam Optional<String> area)
+    {
+//        String nameSV = name.orElse("");
+//        String areas = area.orElse("");
+//        String description = des.orElse("");
+//        model.addAttribute("nameSV", nameSV);
+//        model.addAttribute("areas", areas);
+//        model.addAttribute("description", description);
+//        model.addAttribute("servicess", iService.findAllAndSearch(nameSV, description, areas, pageable));
+        model.addAttribute("servicess", iService.findAll(pageable));
         return "service/list";
     }
 
-//    @GetMapping(value = "/create")
-//    public String showCreateForm(Model model) {
-//        model.addAttribute("customerType", customerTypeRepository.findAll());
-//        model.addAttribute("customerDto", new CustomerDto());
-//        return "/customer/create";
-//    }
-//
-//
-//    @PostMapping(value = "/save")
-//    public String save(@ModelAttribute @Validated CustomerDto customerDto, BindingResult bindingResult,
-//                       RedirectAttributes redirectAttributes, Model model) {
-//
-////        new CustomerDto().validate(customerDto, bindingResult);
-//        if (bindingResult.hasFieldErrors()) {
-//            model.addAttribute("customerType", customerTypeRepository.findAll());
-//            return "/customer/create";
-//        } else {
-//            Customer customer = new Customer();
-//            BeanUtils.copyProperties(customerDto, customer);
-//            customerService.save(customer);
-//            redirectAttributes.addFlashAttribute("message", "Successfully added new");
-//            return "redirect:/customers";
-//        }
-//    }
-//
-//    @GetMapping("/edit")
-//    public String editForm(@RequestParam int id, Model model) {
-//        model.addAttribute("customerType", customerTypeRepository.findAll());
-//        Customer customer = customerService.findById(id);
-//        CustomerDto customerDto = new CustomerDto();
-//        BeanUtils.copyProperties(customer, customerDto);
-//        model.addAttribute("customerDto", customerDto);
-//        return "/customer/edit";
-//    }
-//
-//    @PostMapping("/update")
-//    public String editProduct(@ModelAttribute @Validated CustomerDto customerDto,
-//                              BindingResult bindingResult, Model model
-//            ,RedirectAttributes redirectAttributes) {
-//
-////        new CustomerDto().validate(customerDto, bindingResult);
-//        if (bindingResult.hasFieldErrors()) {
-//            model.addAttribute("customerType", customerTypeRepository.findAll());
-//            return "/customer/edit";
-//        } else {
-//            Customer customer = new Customer();
-//            BeanUtils.copyProperties(customerDto, customer);
-//            customerService.update(customer);
-//            redirectAttributes.addFlashAttribute("message", "Successful update ");
-//            return "redirect:/customers";
-//        }
-//    }
-//
-//    @GetMapping("/delete")
-//    public String deleteForm(@RequestParam int id, RedirectAttributes redirectAttributes) {
-//        Customer customer = customerService.findById(id);
-//        customerService.remove(customer);
-//        redirectAttributes.addFlashAttribute("message", "Successful delete ");
-//        return "redirect:/customers";
-//    }
-//
-//
-//    @GetMapping("/view")
-//    public String view(@RequestParam int id, Model model) {
-//        model.addAttribute("customer", customerService.findById(id));
-//        return "/customer/view";
-//    }
+    @GetMapping(value = "/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("serviceType", serviceType.findAll());
+        model.addAttribute("rentType", rentType.findAll());
+        model.addAttribute("serviceDto", new ServiceDto());
+        return "/service/create";
+    }
+
+
+    @PostMapping(value = "/save")
+    public String save(@ModelAttribute @Validated ServiceDto serviceDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes, Model model) {
+
+//        new CustomerDto().validate(customerDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("serviceType", serviceType.findAll());
+            model.addAttribute("rentType", rentType.findAll());
+            return "/service/create";
+        } else {
+            Service service = new Service();
+            BeanUtils.copyProperties(serviceDto, service);
+            iService.save(service);
+            redirectAttributes.addFlashAttribute("message", "Successfully added new");
+            return "redirect:/services";
+        }
+    }
+
+
+    @GetMapping("/delete")
+    public String deleteForm(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        Service service = iService.findById(id);
+        iService.remove(service);
+        redirectAttributes.addFlashAttribute("message", "Successful delete ");
+        return "redirect:/services";
+    }
+
+
+
 
 }

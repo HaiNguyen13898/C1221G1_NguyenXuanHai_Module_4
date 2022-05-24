@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit information</title>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
+
 </head>
 <body>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
+
 <center>
     <h3>
         Edit customer
@@ -12,7 +16,7 @@
 
     <form th:action="@{/customers/update}" th:object="${customerDto}" method="post">
         <fieldset>
-            <legend>Product Information</legend>
+            <legend>Customer Information</legend>
             <table border="1">
                 <input type="hidden" th:field="*{idCustomer}">
                 <tr>
@@ -30,7 +34,7 @@
                 <tr>
                     <th>Gender</th>
                     <td>
-                        <select th:field="*{gender}" th:if>
+                        <select th:field="*{gender}">
                             <option th:value="Nam">Nam</option>
                             <option th:value="Nữ">Nữ</option>
                             <option th:value="Gay">Gay</option>
@@ -79,5 +83,8 @@
         </fieldset>
     </form>
 </center>
+
+<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
 </body>
 </html>

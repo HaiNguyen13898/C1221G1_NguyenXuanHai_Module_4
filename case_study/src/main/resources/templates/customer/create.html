@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Create customer</title>
-    <th:block th:replace="~{customer/layout_for_all :: head_bootstrap} "></th:block>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
 </head>
 <body>
-<th:block th:replace="~{customer/layout_for_all ::nav_bootstrap }"></th:block>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
 
 <center>
     <h3>Create customer</h3>
-
-
     <form th:action="@{/customers/save}" th:object="${customerDto}" method="post">
         <fieldset>
             <legend>Form create product</legend>
@@ -76,7 +74,7 @@
     </form>
 </center>
 
-<th:block th:replace="~{customer/layout_for_all :: footer_bootstrap}"></th:block>
-<th:block th:replace="~{customer/layout_for_all :: js_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
 </body>
 </html>

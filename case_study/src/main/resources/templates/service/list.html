@@ -3,34 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer</title>
-    <th:block th:replace="~{customer/layout_for_all :: head_bootstrap} "></th:block>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
 </head>
 <body>
-<th:block th:replace="~{customer/layout_for_all ::nav_bootstrap }"></th:block>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
 <center>
-    <h2>Customer list</h2>
+    <h2>Services list</h2>
     <h3>
-        <a th:href="@{/services/create}">Create customer </a>
+        <a th:href="@{/services/create}">Create service </a>
     </h3>
 
     <p th:text="${message}" style="color: red"></p>
 
-    <form action="/services">
-        <input type="text" placeholder="search name" name="name">
-        <input type="text" placeholder="search address" name="address">
-        <input type="text" placeholder="search phone number" name="phone">
-        <input type="submit" value="Search">
-    </form>
+<!--    <form th:action="@{/services}">-->
+<!--        <input type="text" placeholder="search name" name="name">-->
+<!--        <input type="text" placeholder="search description" name="area">-->
+<!--        <input type="text" placeholder="search pool area" name="cost">-->
+<!--        <input type="submit" value="Search">-->
+<!--    </form>-->
 
-
-    private String svName;
-    private String svArea;
-    private String svCost;
-    private String maxPeople;
-    private String standardRoom;
-    private String descriptionOtherConvenience;
-    private String poolArea;
-    private String numberFloor;
 
     <br>
     <table class="table" border="1">
@@ -46,30 +37,22 @@
             <th scope="col">Number floor</th>
             <th scope="col">Rent type</th>
             <th scope="col">Service type</th>
-            <th scope="col">Detail</th>
-            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="service : ${services}">
-            <td th:text="${service.nameCustomer}"></td>
-            <td th:text="${service.dateOfBirth}"></td>
-
-            <td th:text="${customers.gender}"></td>
-
-            <td th:text="${customers.idCard}"></td>
-            <td th:text="${customers.phoneNumber}"></td>
-            <td th:text="${customers.email}"></td>
-            <td th:text="${customers.address}"></td>
-            <td th:text="${customers.customerType.nameCusType}"></td>
-            <!--            <td>-->
-            <!--                <span th:if="${products.typeProduct}" th:text="${products.typeProduct.typeName}"></span>-->
-            <!--                <span th:unless="${products.typeProduct}" th:text="${products.typeProduct}"></span>-->
-            <!--            </td>-->
-            <td><a th:href="@{/customers/edit(id=${customers.idCustomer})}">Edit</a></td>
-            <td><a th:href="@{/customers/delete(id=${customers.idCustomer})}">Delete</a></td>
-            <td><a>Detail</a></td>
+        <tr th:each="serviceObj : ${servicess}">
+            <td th:text="${serviceObj.svName}"></td>
+            <td th:text="${serviceObj.svArea}"></td>
+            <td th:text="${serviceObj.svCost}"></td>
+            <td th:text="${serviceObj.maxPeople}"></td>
+            <td th:text="${serviceObj.standardRoom}"></td>
+            <td th:text="${serviceObj.descriptionOtherConvenience}"></td>
+            <td th:text="${serviceObj.poolArea}"></td>
+            <td th:text="${serviceObj.numberFloor}"></td>
+            <td th:text="${serviceObj.rentType.rentTypeName}"></td>
+            <td th:text="${serviceObj.serviceType.serviceTypetName}"></td>
+            <td><a th:href="@{/services/delete(id=${serviceObj.id})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
@@ -89,29 +72,31 @@
     <!--        </a>-->
     <!--    </div>-->
 
+<!--    ,  keyword=${nameSV},keyword=${description},keyword=${areas}-->
+<!--    , keyword=${nameSV},keyword=${description},keyword=${areas}-->
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
             <li class="page-item ">
-                <a class="page-link" th:if="${customer.hasPrevious()}"
-                   th:href="@{/customers(page=${customer.number - 1},  keyword=${nameCus},keyword=${addressCus} ,keyword=${phoneCus} )}">Previous</a>
+                <a class="page-link" th:if="${servicess.hasPrevious()}"
+                   th:href="@{/services(page=${servicess.number - 1})}">Previous</a>
             </li>
             <li class="page-item">
-                <span class="page-link" th:text="${customer.number + 1}"></span>
+                <span class="page-link" th:text="${servicess.number + 1}"></span>
             </li>
             <li class="page-link">/</li>
             <li class="page-item">
-                <span class="page-link" th:text="${customer.totalPages}"></span>
+                <span class="page-link" th:text="${servicess.totalPages}"></span>
             </li>
             <li class="page-item">
-                <a class="page-link" th:if="${customer.hasNext()}"
-                   th:href="@{/customers(page=${customer.number + 1}, keyword=${nameCus},keyword=${addressCus} ,keyword=${phoneCus} )}">Next</a>
+                <a class="page-link" th:if="${servicess.hasNext()}"
+                   th:href="@{/services(page=${servicess.number + 1})}">Next</a>
             </li>
         </ul>
     </nav>
 
-    <th:block th:replace="~{customer/layout_for_all :: footer_bootstrap}"></th:block>
-    <th:block th:replace="~{customer/layout_for_all :: js_bootstrap}"></th:block>
+    <th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
+    <th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
 </center>
 </body>
 </html>

@@ -3,71 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Create customer</title>
-    <th:block th:replace="~{customer/layout_for_all :: head_bootstrap} "></th:block>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
 </head>
 <body>
-<th:block th:replace="~{customer/layout_for_all ::nav_bootstrap }"></th:block>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
 
 <center>
-    <h3>Create customer</h3>
-
-
-    <form th:action="@{/customers/save}" th:object="${customerDto}" method="post">
+    <h3>Create Service</h3>
+    <form th:action="@{/services/save}" th:object="${serviceDto}" method="post">
         <fieldset>
             <legend>Form create product</legend>
             <table border="1">
                 <tr>
                     <th>Name</th>
-                    <td><input type="text" th:field="*{nameCustomer}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('nameCustomer')}" th:errors="*{nameCustomer}"> </p></td>
+                    <td><input type="text" th:field="*{svName}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('svName')}" th:errors="*{svName}"></p></td>
                 </tr>
                 <tr>
-                    <th>Date of birth</th>
-                    <td><input type="date" th:field="*{dateOfBirth}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"> </p></td>
+                    <th>Service area</th>
+                    <td><input type="text" th:field="*{svArea}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('svArea')}" th:errors="*{svArea}"></p></td>
                 </tr>
                 <tr>
-                    <th>Gender</th>
+                    <th>Service cost</th>
+                    <td><input type="text" th:field="*{svCost}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('svCost')}" th:errors="*{svCost}"></p></td>
+                </tr>
+                <tr>
+                    <th>Max people</th>
+                    <td><input type="text" th:field="*{maxPeople}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('maxPeople')}" th:errors="*{maxPeople}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Standard room</th>
+                    <td><input type="text" th:field="*{standardRoom}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('standardRoom')}"
+                           th:errors="*{standardRoom}"></p></td>
+                </tr>
+                <tr>
+                    <th>Description other convenience</th>
+                    <td><input type="text" th:field="*{descriptionOtherConvenience}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+                           th:errors="*{descriptionOtherConvenience}"></p></td>
+                </tr>
+                <tr>
+                    <th>Pool area</th>
+                    <td><input type="text" th:field="*{poolArea}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></p></td>
+                </tr>
+                <tr>
+                    <th>Number floor</th>
+                    <td><input type="text" th:field="*{numberFloor}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('numberFloor')}"
+                           th:errors="*{numberFloor}"></p></td>
+                </tr>
+                <tr>
+                    <th>Rent type</th>
                     <td>
-                        <select th:field="*{gender}">
-                            <option th:value="Nam">Nam</option>
-                            <option th:value="Nữ">Nữ</option>
-                            <option th:value="Gay">Gay</option>
+                        <select th:field="*{rentType}">
+                            <option th:each="r : ${rentType}"
+                                    th:value="${r.id}"
+                                    th:text="${r.rentTypeName}">
+                            </option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th>Id card</th>
-                    <td><input type="text" th:field="*{idCard}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"> </p></td>
-                </tr>
-                <tr>
-                    <th>Phone number</th>
-                    <td><input type="text" th:field="*{phoneNumber}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"> </p></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="text" th:field="*{email}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </p></td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td><input type="text" th:field="*{address}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p></td>
+                    <th>Service type</th>
+                    <td>
+                        <select th:field="*{serviceType}">
+                            <option th:each="s : ${serviceType}"
+                                    th:value="${s.id}"
+                                    th:text="${s.serviceTypetName}">
+                            </option>
+                        </select>
+                    </td>
                 </tr>
 
-                <tr><tr>
-                <th>Customer Type</th>
-                <td>
-                    <select th:field="*{customerType}" >
-                        <option  th:each="c : ${customerType}"
-                                 th:value="${c.id}"
-                                 th:text="${c.nameCusType}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
                 <td></td>
                 <td><input type="submit" value="Save"></td>
                 </tr>
@@ -76,7 +89,7 @@
     </form>
 </center>
 
-<th:block th:replace="~{customer/layout_for_all :: footer_bootstrap}"></th:block>
-<th:block th:replace="~{customer/layout_for_all :: js_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
 </body>
 </html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create employee</title>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
+
+<center>
+    <h3>Create Employee</h3>
+
+    <form th:action="@{/employees/save}" th:object="${employeeDto}" method="post">
+        <fieldset>
+            <legend>Form create employee</legend>
+            <table border="1">
+                <tr>
+                    <th>Employee name</th>
+                    <td><input type="text" th:field="*{nameEmployee}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('nameEmployee')}"
+                           th:errors="*{nameEmployee}"></p></td>
+                </tr>
+                <tr>
+                    <th>Date of birth</th>
+                    <td><input type="date" th:field="*{dateBirth}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('dateBirth')}" th:errors="*{dateBirth}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Id card</th>
+                    <td><input type="text" th:field="*{idCardEmployee}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('idCardEmployee')}"
+                           th:errors="*{idCardEmployee}"></p></td>
+                </tr>
+                <tr>
+                    <th>Salary</th>
+                    <td><input type="text" th:field="*{salary}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p></td>
+                </tr>
+                <tr>
+                    <th>Phone number</th>
+                    <td><input type="text" th:field="*{phoneNumber}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
+                           th:errors="*{phoneNumber}"></p></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td><input type="text" th:field="*{email}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td><input type="text" th:field="*{address}"></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p></td>
+                </tr>
+
+                <tr>
+                    <th>Position</th>
+                    <td>
+                        <select th:field="*{position}">
+                            <option th:each="p : ${position}"
+                                    th:value="${p.idPosition}"
+                                    th:text="${p.namePosition}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Education degree</th>
+                    <td>
+                        <select th:field="*{educationDegree}">
+                            <option th:each="e : ${education}"
+                                    th:value="${e.idEducation}"
+                                    th:text="${e.nameEducation}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Division</th>
+                    <td>
+                        <select th:field="*{division}">
+                            <option th:each="d : ${division}"
+                                    th:value="${d.idDivision}"
+                                    th:text="${d.nameDivision}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <td></td>
+                <td><input type="submit" value="Save"></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</center>
+
+<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
+</body>
+</html>

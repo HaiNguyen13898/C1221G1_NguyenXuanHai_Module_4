@@ -1,4 +1,4 @@
-package com.exercise.dto.customer;
+package com.exercise.dto;
 
 import com.exercise.model.customer.CustomerType;
 

@@ -7,16 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 @org.springframework.stereotype.Service
 public class ServiceImpl implements IService {
 
     @Autowired
     IServiceRepository serviceRepository;
 
+
     @Override
-    public Page<Service> findAllAndSearch(String name, String des, String area, Pageable pageable) {
-        return this.serviceRepository.findAllBySvNameContainingAndAndDescriptionOtherConvenienceContainingAndAndPoolAreaContaining(name, des, area, pageable);
+    public Page<Service> findAllAndSearch(String name,String area, String cost,   Pageable pageable) {
+        return this.serviceRepository.findAllBySvNameContainingAndSvAreaContainingAndSvCostContaining(
+                name, area, cost, pageable);
     }
+
+    @Override
+    public Page<Service> findAll(Pageable pageable) {
+        return serviceRepository.findAll(pageable);
+    }
+
 
     @Override
     public void save(Service service) {

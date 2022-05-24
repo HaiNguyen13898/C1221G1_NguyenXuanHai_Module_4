@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer</title>
-    <th:block th:replace="~{customer/layout_for_all :: head_bootstrap} "></th:block>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
 </head>
 <body>
-<th:block th:replace="~{customer/layout_for_all ::nav_bootstrap }"></th:block>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
 <center>
     <h2>Customer list</h2>
     <h3>
@@ -18,7 +18,10 @@
     <form action="/customers">
         <input type="text" placeholder="search name" name="name">
         <input type="text" placeholder="search address" name="address">
-        <input type="text" placeholder="search phone number" name="phone">
+        <select name="customerType" >
+            <option value="-1">Customer Type</option>
+            <option th:each=" cusType : ${customerTypes}" th:value="${cusType.id}" th:text="${cusType.nameCusType}"></option>
+        </select>
         <input type="submit" value="Search">
     </form>
 
@@ -43,9 +46,7 @@
         <tr th:each="customers : ${customer}">
             <td th:text="${customers.nameCustomer}"></td>
             <td th:text="${customers.dateOfBirth}"></td>
-
             <td th:text="${customers.gender}"></td>
-
             <td th:text="${customers.idCard}"></td>
             <td th:text="${customers.phoneNumber}"></td>
             <td th:text="${customers.email}"></td>
@@ -55,9 +56,9 @@
             <!--                <span th:if="${products.typeProduct}" th:text="${products.typeProduct.typeName}"></span>-->
             <!--                <span th:unless="${products.typeProduct}" th:text="${products.typeProduct}"></span>-->
             <!--            </td>-->
+            <td><a>Detail</a></td>
             <td><a th:href="@{/customers/edit(id=${customers.idCustomer})}">Edit</a></td>
             <td><a th:href="@{/customers/delete(id=${customers.idCustomer})}">Delete</a></td>
-            <td><a>Detail</a></td>
         </tr>
         </tbody>
     </table>
@@ -82,7 +83,7 @@
         <ul class="pagination justify-content-end">
             <li class="page-item ">
                 <a class="page-link" th:if="${customer.hasPrevious()}"
-                   th:href="@{/customers(page=${customer.number - 1},  keyword=${nameCus},keyword=${addressCus} ,keyword=${phoneCus} )}">Previous</a>
+                   th:href="@{/customers(page=${customer.number - 1},  keyword=${nameVal},keyword=${addresss} ,keyword=${cusType})}">Previous</a>
             </li>
             <li class="page-item">
                 <span class="page-link" th:text="${customer.number + 1}"></span>
@@ -93,13 +94,13 @@
             </li>
             <li class="page-item">
                 <a class="page-link" th:if="${customer.hasNext()}"
-                   th:href="@{/customers(page=${customer.number + 1}, keyword=${nameCus},keyword=${addressCus} ,keyword=${phoneCus} )}">Next</a>
+                   th:href="@{/customers(page=${customer.number + 1}, keyword=${nameVal},keyword=${addresss} ,keyword=${cusType})}">Next</a>
             </li>
         </ul>
     </nav>
 
-    <th:block th:replace="~{customer/layout_for_all :: footer_bootstrap}"></th:block>
-    <th:block th:replace="~{customer/layout_for_all :: js_bootstrap}"></th:block>
+    <th:block th:replace="~{layout_for_all ::  footer_bootstrap}"></th:block>
+    <th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
 </center>
 </body>
 </html>

@@ -15,11 +15,6 @@ public class CustomerService implements ICustomerService {
 
 
     @Override
-    public Page<Customer> findAllAndSearch(String name, String address, String phone, Pageable pageable) {
-        return this.customerRepository.findAllByNameCustomerContainingAndAddressContainingAndPhoneNumberContaining(name, address, phone, pageable);
-    }
-
-    @Override
     public void save(Customer customer) {
         this.customerRepository.save(customer);
     }
@@ -37,5 +32,16 @@ public class CustomerService implements ICustomerService {
     @Override
     public void remove(Customer customer) {
         this.customerRepository.delete(customer);
+    }
+
+    @Override
+    public Page<Customer> findAll1(String nameVal, String areaVal, Pageable pageable) {
+        return this.customerRepository.findAllByNameCustomerContainingAndAddressContaining(nameVal, areaVal, pageable);
+    }
+
+    @Override
+    public Page<Customer> findAll2(String nameVal, String areaVal, int cusType, Pageable pageable) {
+        return customerRepository.findAllByNameCustomerContainingAndAddressContainingAndCustomerType_Id
+                (nameVal, areaVal, cusType, pageable);
     }
 }
