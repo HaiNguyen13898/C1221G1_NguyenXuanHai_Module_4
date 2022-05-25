@@ -7,4 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     Page<Employee> findAll(Pageable pageable);
+
+    Page<Employee> findAllByNameEmployeeContainingAndPositionAndDivisionAndEducationDegree
+            (String name, int position, int division, int education, Pageable pageable);
+
+    Page<Employee> findAllByNameEmployeeContaining(String name, Pageable pageable);
 }

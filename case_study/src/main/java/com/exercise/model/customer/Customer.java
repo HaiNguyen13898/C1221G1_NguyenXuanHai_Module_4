@@ -1,7 +1,10 @@
 package com.exercise.model.customer;
 
 
+import com.exercise.model.contract.Contract;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -23,6 +26,17 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name="idCusType", referencedColumnName = "id")
     private CustomerType customerType;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Contract> contractList;
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
 
     public CustomerType getCustomerType() {
         return customerType;

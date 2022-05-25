@@ -3,10 +3,12 @@ package com.exercise.dto;
 import com.exercise.model.empolyee.Division;
 import com.exercise.model.empolyee.EducationDegree;
 import com.exercise.model.empolyee.Position;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotBlank;
 
-public class EmployeeDto {
+public class EmployeeDto implements Validator {
 
     private int idEmployee;
     @NotBlank
@@ -127,5 +129,15 @@ public class EmployeeDto {
 
     public void setDivision(Division division) {
         this.division = division;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

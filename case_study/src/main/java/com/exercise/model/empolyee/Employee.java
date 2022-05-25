@@ -1,6 +1,9 @@
 package com.exercise.model.empolyee;
 
+import com.exercise.model.contract.Contract;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -30,6 +33,17 @@ public class Employee {
     @JoinColumn(name = "idDivision", referencedColumnName = "idDivision")
     private Division division;
 
+
+    @OneToMany(mappedBy = "employee")
+    private List<Contract> contractList;
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
 
     public Position getPosition() {
         return position;

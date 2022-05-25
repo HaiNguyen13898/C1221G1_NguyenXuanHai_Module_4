@@ -17,10 +17,11 @@ public class ServiceImpl implements IService {
 
 
     @Override
-    public Page<Service> findAllAndSearch(String name,String area, String cost,   Pageable pageable) {
-        return this.serviceRepository.findAllBySvNameContainingAndSvAreaContainingAndSvCostContaining(
-                name, area, cost, pageable);
+    public List<Service> findAll2() {
+        return serviceRepository.findAll();
     }
+
+
 
     @Override
     public Page<Service> findAll(Pageable pageable) {

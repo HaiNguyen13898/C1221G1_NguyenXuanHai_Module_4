@@ -25,3 +25,63 @@ INSERT INTO `case`.`service` (`sv_name`, `sv_area`, `sv_cost`, `max_people`, `st
 INSERT INTO `case`.`service` (`sv_name`, `sv_area`, `sv_cost`, `max_people`, `standard_room`, `description_other_convenience`, `pool_area`, `number_floor`, `id_rent_type`, `id_service_type`) VALUES ( 'Villa No Beach Front', '22000', '9000000', '8', 'normal', 'Có hồ bơi', '300', '3', 3, 1);
 INSERT INTO `case`.`service` (`sv_name`, `sv_area`, `sv_cost`, `max_people`, `standard_room`, `description_other_convenience`, `pool_area`, `number_floor`, `id_rent_type`, `id_service_type`) VALUES ( 'House Princess 02', '10000', '4000000', '5', 'normal', 'Có thêm bếp nướng', null, '2', 3, 2);
 INSERT INTO `case`.`service` (`sv_name`, `sv_area`, `sv_cost`, `max_people`, `standard_room`, `description_other_convenience`, `pool_area`, `number_floor`, `id_rent_type`, `id_service_type`) VALUES ( 'Room Twin 02', '3000', '900000', '2', 'normal', 'Có tivi', null, null, 4, 3);
+
+insert into position (name_position) values ("Quản lý"), ("Nhân viên");
+insert into education_degree (name_education) values ("Trung cấp"), ("Cao Đẳng"), ("Đại học"), ("Sau đại học");
+insert into division (name_division) values ("Sale-Marketing"), ("Hành chính"), ("Phục vụ"), ("Quản lý");
+
+insert into employee (name_employee, date_birth, id_card_employee, salary, phone_number, email, address, id_position, id_education, id_division)
+values ("Nguyễn Văn An", "1970-11-07", "456231786", '10000000', "0901234121", "annguyen@gmail.com", "295 Nguyễn Tất Thành, Đà Nẵng",1,3,1),
+("Lê Văn Bình", "1997-04-09", "654231234", '7000000', "0934212314", "binhlv@gmail.com", "22 Yên Bái, Đà Nẵng",1,2,2),
+("Hồ Thị Yến", "1995-12-12", "999231723", '14000000', "0412352315", "thiyen@gmail.com", "K234/11 Điện Biên Phủ, Gia Lai",1,3,2),
+("Võ Công Toản", "1980-04-04", "123231365", '17000000', "0374443232", "toan0404@gmail.com", "77 Hoàng Diệu, Quảng Trị",1,4,4),
+("Nguyễn Bỉnh Phát", "1999-12-09", "454363232", '6000000', "0902341231", "phatphat@gmail.com", "43 Yên Bái, Đà Nẵng",2,1,1),
+("Khúc Nguyễn An Nghi", "2000-11-08", "964542311", '7000000', "0978653213", "annghi20@gmail.com", "294 Nguyễn Tất Thành, Đà Nẵng",2,2,3),
+("Nguyễn Hữu Hà", "1993-01-01", "534323231", '8000000', "0941234553", "nhh0101@gmail.com", "4 Nguyễn Chí Thanh, Huế",2,3,2),
+("Nguyễn Hà Đông", "1989-09-03", "234414123", '9000000', "0642123111", "donghanguyen@gmail.com", "111 Hùng Vương, Hà Nội",2,4,4),
+("Tòng Hoang", "1982-09-03", "256781231", '6000000', "0245144444", "hoangtong@gmail.com", "213 Hàm Nghi, Đà Nẵng",2,4,4),
+("Nguyễn Công Đạo", "1994-01-08", "755434343", '8000000', "0988767111", "nguyencongdao12@gmail.com", "6 Hoà Khánh, Đồng Nai",2,3,2);
+
+INSERT INTO `case`.`contract` ( `start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2020-12-08', '2020-12-08', '0', '3', '1', '3');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2020-07-14', '2020-07-21', '200000', '7', '3', '1');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-03-15', '2021-03-17', '50000', '3', '4', '2');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-01-14', '2021-01-18', '100000', '7', '5', '5');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-07-14', '2021-07-15', '0', '2', '2', '2');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-06-01', '2021-06-03', '0', '7', '7', '7');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-09-02', '2021-09-05', '100000', '7', '4', '4');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-06-17', '2021-06-18', '150000', '3', '4', '1');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ('2020-11-19', '2020-11-19', '0', '3', '4', '3');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-04-12', '2021-04-14', '0', '10', '3', '5');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-04-25', '2021-04-25', '0', '2', '2', '1');
+INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-05-25', '2021-05-27', '0', '7', '10', '1');
+
+
+INSERT INTO `case`.`contract_detail` ( `quantity`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('1', '5', '2', '4');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('2', '8', '2', '5');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('3', '15', '2', '6');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('4', '1', '3', '1');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('5', '11', '3', '2');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('6', '1', '1', '3');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('7', '2', '1', '2');
+INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('8', '2', '12', '2');
+
+
+INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Karaoke', '10000', 'giờ', 'tiện nghi, hiện tại');
+INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Thuê xe máy', '10000', 'chiếc', 'hỏng 1 xe');
+INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Thuê xe đạp', '20000', 'chiếc', 'tốt');
+INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Buffet buổi sáng', '15000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
+INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Buffet buổi trưa', '90000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
+INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Buffet buổi tối', '16000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
+
+
+ALTER TABLE contract
+  DROP COLUMN total_money;
+  
+
+
+ALTER TABLE attach_service
+  DROP COLUMN unit;
+
+
+
+

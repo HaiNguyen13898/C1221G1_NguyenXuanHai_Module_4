@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
+<center>
+    <h2>Contract list</h2>
+    <h3>
+        <a th:href="@{/contracts/create}">Create contract </a>
+    </h3>
+
+    <p th:text="${message}" style="color: red"></p>
+
+
+    <br>
+    <table class="table" border="1">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Code contract</th>
+            <th scope="col">Contract date</th>
+            <th scope="col">Contract end date</th>
+            <th scope="col">Deposit</th>
+            <th scope="col">Employee</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Service</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contract, no : ${contractList}">
+            <th scope="row" th:text="${no.count + (contractList.number * 4)}"></th>
+            <td th:text="${contract.idContract}"></td>
+            <td th:text="${contract.startDay}"></td>
+            <td th:text="${contract.enDay}"></td>
+            <td th:text="${contract.deposit}"></td>
+            <td th:text="${contract.employee.nameEmployee}"></td>
+            <td th:text="${contract.customer.nameCustomer}"></td>
+            <td th:text="${contract.service.svName}"></td>
+            <td><a>Detail</a></td>
+            <td><a th:href="@{/contracts/edit(id=${contract.idContract})}">Edit</a></td>
+            <td><a th:href="@{/contracts/delete(id=${contract.idContract})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item ">
+                <a class="page-link" th:if="${contractList.hasPrevious()}"
+                   th:href="@{/contracts(page=${contractList.number - 1})}">Previous</a>
+            </li>
+            <li class="page-item">
+                <span class="page-link" th:text="${contractList.number + 1}"></span>
+            </li>
+            <li class="page-link">/</li>
+            <li class="page-item">
+                <span class="page-link" th:text="${contractList.totalPages}"></span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:if="${contractList.hasNext()}"
+                   th:href="@{/contracts(page=${contractList.number + 1})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    <th:block th:replace="~{layout_for_all ::  footer_bootstrap}"></th:block>
+    <th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
+</center>
+</body>
+</html>

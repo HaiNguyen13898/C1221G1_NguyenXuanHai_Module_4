@@ -8,6 +8,7 @@ import com.exercise.service.employee.IEmployeeService;
 import com.exercise.service.employee.IPositionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employees")
@@ -31,8 +34,30 @@ public class EmployeeController {
 
 
     @GetMapping("")
-    public String showList (Model model, @PageableDefault(value = 4) Pageable pageable) {
-        model.addAttribute("employeess", this.employeeService.findAll(pageable));
+    public String showList (Model model, @PageableDefault(value = 4) Pageable pageable,
+                            @RequestParam Optional<String> name,
+                            @RequestParam Optional<Integer> position,
+                            @RequestParam Optional<Integer> division,
+                            @RequestParam Optional<Integer> education)
+    {
+        String nameEmployee = name.orElse("");
+        int pos = position.orElse(-1);
+        int div = division.orElse(-1);
+        int edu = education.orElse(-1);
+        Page<Employee>  employeePage = null;
+        if(pos == -1 || div == -1 || edu == -1){
+            employeePage = employeeService.findAllAndSearchName(nameEmployee, pageable);
+        } else {
+            employeePage = employeeService.findAllAndSearch(nameEmployee, pos, div, edu, pageable);
+        }
+        model.addAttribute("name", nameEmployee);
+        model.addAttribute("pos", pos);
+        model.addAttribute("div", div);
+        model.addAttribute("edu", edu);
+        model.addAttribute("division", divisionService.findAll());
+        model.addAttribute("position", positionService.findAll());
+        model.addAttribute("education", educationDegreeService.findAll());
+        model.addAttribute("employeess", employeePage);
         return "/employee/list";
     }
 

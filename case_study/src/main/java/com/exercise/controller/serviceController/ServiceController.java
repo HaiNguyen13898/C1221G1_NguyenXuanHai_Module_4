@@ -23,28 +23,18 @@ import java.util.Optional;
 @RequestMapping("/services")
 public class ServiceController {
     @Autowired
-    IService iService;
+    private IService iService;
 
     @Autowired
-    IServiceType serviceType;
+    private IServiceType serviceType;
 
     @Autowired
-    IRentType rentType;
+    private IRentType rentType;
 
     @GetMapping()
     public String showList(Model model,
-                           @PageableDefault(value = 3) Pageable pageable)
-//                           @RequestParam Optional<String> name,
-//                           @RequestParam Optional<String> des,
-//                           @RequestParam Optional<String> area)
-    {
-//        String nameSV = name.orElse("");
-//        String areas = area.orElse("");
-//        String description = des.orElse("");
-//        model.addAttribute("nameSV", nameSV);
-//        model.addAttribute("areas", areas);
-//        model.addAttribute("description", description);
-//        model.addAttribute("servicess", iService.findAllAndSearch(nameSV, description, areas, pageable));
+                           @PageableDefault(value = 3) Pageable pageable) {
+
         model.addAttribute("servicess", iService.findAll(pageable));
         return "service/list";
     }
@@ -84,8 +74,6 @@ public class ServiceController {
         redirectAttributes.addFlashAttribute("message", "Successful delete ");
         return "redirect:/services";
     }
-
-
 
 
 }

@@ -1,10 +1,12 @@
 package com.exercise.dto;
 
 import com.exercise.model.customer.CustomerType;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotBlank;
 
-public class CustomerDto {
+public class CustomerDto implements Validator {
     private int idCustomer;
     @NotBlank
     private String nameCustomer;
@@ -95,5 +97,15 @@ public class CustomerDto {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

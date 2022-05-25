@@ -1,6 +1,9 @@
 package com.exercise.model.serivces;
 
+import com.exercise.model.contract.Contract;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Service {
@@ -26,6 +29,17 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "id_service_type", referencedColumnName = "id")
     private ServiceType serviceType;
+
+    @OneToMany(mappedBy = "service")
+    private List<Contract> contractList;
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
 
     public Service(int id, String svName, String svArea, String svCost, String maxPeople, String standardRoom, String descriptionOtherConvenience, String poolArea, String numberFloor) {
         this.id = id;

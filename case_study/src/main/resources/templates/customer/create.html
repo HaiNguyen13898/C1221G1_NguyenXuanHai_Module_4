@@ -17,12 +17,14 @@
                 <tr>
                     <th>Name</th>
                     <td><input type="text" th:field="*{nameCustomer}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('nameCustomer')}" th:errors="*{nameCustomer}"> </p></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('nameCustomer')}"
+                           th:errors="*{nameCustomer}"></p></td>
                 </tr>
                 <tr>
                     <th>Date of birth</th>
                     <td><input type="date" th:field="*{dateOfBirth}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"> </p></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}"
+                           th:errors="*{dateOfBirth}"></p></td>
                 </tr>
                 <tr>
                     <th>Gender</th>
@@ -37,35 +39,35 @@
                 <tr>
                     <th>Id card</th>
                     <td><input type="text" th:field="*{idCard}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"> </p></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p></td>
                 </tr>
                 <tr>
                     <th>Phone number</th>
                     <td><input type="text" th:field="*{phoneNumber}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"> </p></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
+                           th:errors="*{phoneNumber}"></p></td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td><input type="text" th:field="*{email}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </p></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td><input type="text" th:field="*{address}"></td>
-                    <td> <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p></td>
+                    <td><p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p></td>
                 </tr>
-
-                <tr><tr>
-                <th>Customer Type</th>
-                <td>
-                    <select th:field="*{customerType}" >
-                        <option  th:each="c : ${customerType}"
-                                 th:value="${c.id}"
-                                 th:text="${c.nameCusType}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
+                <tr>
+                    <th>Customer Type</th>
+                    <td>
+                        <select th:field="*{customerType}">
+                            <option th:each="c : ${customerType}"
+                                    th:value="${c.id}"
+                                    th:text="${c.nameCusType}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
                 <td></td>
                 <td><input type="submit" value="Save"></td>
                 </tr>
