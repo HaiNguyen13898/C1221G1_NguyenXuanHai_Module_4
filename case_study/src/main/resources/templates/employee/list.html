@@ -7,98 +7,156 @@
 </head>
 <body>
 <th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
-<center>
-    <h2>Employee list</h2>
-    <h3>
-        <a th:href="@{/employees/create}">Create employee </a>
-    </h3>
 
-    <p th:text="${message}" style="color: red"></p>
+<h2 style="text-align: center">Employee list</h2>
 
-    <form th:action="@{/employees}">
-        <input type="text" placeholder="search name" name="name">
-        <select name="position">
+<p th:text="${message}" style="text-align: center; color: red"></p>
+
+<!--<a class="btn btn-primary small" th:href="@{/employees/create}">Create employee </a>-->
+
+<!--<form th:action="@{/employees}">-->
+<!--    <input type="text" placeholder="search name" name="name">-->
+<!--    <select name="position">-->
+<!--        <option value="-1">Position</option>-->
+<!--        <option th:each=" p : ${position}" th:value="${p.idPosition}"-->
+<!--                th:text="${p.namePosition}"></option>-->
+<!--    </select>-->
+<!--    <select name="division">-->
+<!--        <option value="-1">Division</option>-->
+<!--        <option th:each=" d : ${division}" th:value="${d.idDivision}"-->
+<!--                th:text="${d.nameDivision}"></option>-->
+<!--    </select>-->
+<!--    <select name="education">-->
+<!--        <option value="-1">Education degree</option>-->
+<!--        <option th:each=" e : ${education}" th:value="${e.idEducation}"-->
+<!--                th:text="${e.nameEducation}"></option>-->
+<!--    </select>-->
+<!--    <input type="submit" value="Search">-->
+<!--</form>-->
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="btn btn-primary" th:href="@{/employees/create}">Create employee</a>
+    <form action="/employees" class="form-inline">
+        <input class="form-control mr-sm-2" type="search" name="name" placeholder="search name" aria-label="Search">
+
+        <select name="position"  class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             <option value="-1">Position</option>
             <option th:each=" p : ${position}" th:value="${p.idPosition}"
                     th:text="${p.namePosition}"></option>
         </select>
-        <select name="division">
+        <select name="division"  class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             <option value="-1">Division</option>
             <option th:each=" d : ${division}" th:value="${d.idDivision}"
                     th:text="${d.nameDivision}"></option>
         </select>
-        <select name="education">
+        <select name="education"  class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             <option value="-1">Education degree</option>
             <option th:each=" e : ${education}" th:value="${e.idEducation}"
                     th:text="${e.nameEducation}"></option>
         </select>
 
-
-        <input type="submit" value="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+</nav>
+
+<br>
+<table class="table" border="1">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Employee name</th>
+        <th scope="col">Date of birth</th>
+        <th scope="col">Id card</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Position</th>
+        <th scope="col">Education degree</th>
+        <th scope="col">Division</th>
+        <th scope="col">Detail</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employeess}">
+        <td th:text="${employee.nameEmployee}"></td>
+        <td th:text="${employee.dateBirth}"></td>
+        <td th:text="${employee.idCardEmployee}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.address}"></td>
+        <td th:text="${employee.position.namePosition}"></td>
+        <td th:text="${employee.educationDegree.nameEducation}"></td>
+        <td th:text="${employee.division.nameDivision}"></td>
+        <td>Detail</td>
+        <td><a class="btn btn-primary" th:href="@{/employees/edit(id=${employee.idEmployee})}">Edit</a></td>
+        <td><a style="color: white" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal"
+               th:attr="onclick=|deleteCustomer(${employee.idEmployee}, '${employee.nameEmployee}', ${employee.idCardEmployee})|">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
 
 
-    <br>
-    <table class="table" border="1">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Employee name</th>
-            <th scope="col">Date of birth</th>
-            <th scope="col">Id card</th>
-            <th scope="col">Salary</th>
-            <th scope="col">Phone number</th>
-            <th scope="col">Email</th>
-            <th scope="col">Address</th>
-            <th scope="col">Position</th>
-            <th scope="col">Education degree</th>
-            <th scope="col">Division</th>
-            <th scope="col">Detail</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="employee : ${employeess}">
-            <td th:text="${employee.nameEmployee}"></td>
-            <td th:text="${employee.dateBirth}"></td>
-            <td th:text="${employee.idCardEmployee}"></td>
-            <td th:text="${employee.salary}"></td>
-            <td th:text="${employee.phoneNumber}"></td>
-            <td th:text="${employee.email}"></td>
-            <td th:text="${employee.address}"></td>
-            <td th:text="${employee.position.namePosition}"></td>
-            <td th:text="${employee.educationDegree.nameEducation}"></td>
-            <td th:text="${employee.division.nameDivision}"></td>
-            <td>Detail</td>
-            <td><a th:href="@{/employees/edit(id=${employee.idEmployee})}">Edit</a></td>
-            <td><a th:href="@{/employees/delete(id=${employee.idEmployee})}">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+<form th:action="@{/employees/delete}">
+    <!--Modal-->
+    <div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">DELETE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idEmployee" name="idEmployee">
+                    Are you sure about that? Delete?
+                    Customer id card: <p id="idCard"></p> <br>
+                    Customer name : <p id="name"></p> <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Xác nhận xoá chứ?</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    End modal-->
+</form>
 
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-            <li class="page-item ">
-                <a class="page-link" th:if="${employeess.hasPrevious()}"
-                   th:href="@{/employees(page=${employeess.number - 1}, key=${name},key=${pos},key=${div},key=${edu})}">Previous</a>
-            </li>
-            <li class="page-item">
-                <span class="page-link" th:text="${employeess.number + 1}"></span>
-            </li>
-            <li class="page-link">/</li>
-            <li class="page-item">
-                <span class="page-link" th:text="${employeess.totalPages}"></span>
-            </li>
-            <li class="page-item">
-                <a class="page-link" th:if="${employeess.hasNext()}"
-                   th:href="@{/employees(page=${employeess.number + 1}, key=${name},key=${pos},key=${div},key=${edu})}">Next</a>
-            </li>
-        </ul>
-    </nav>
+<script>
+    function deleteCustomer(idEmployee, nameEmployee, idCardEmployee) {
+        document.getElementById("idEmployee").value = idEmployee;
+        document.getElementById("name").innerText = nameEmployee;
+        document.getElementById("idCard").innerText = idCardEmployee;
+    }
+</script>
 
-    <th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
-    <th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
-</center>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <li class="page-item ">
+            <a class="page-link" th:if="${employeess.hasPrevious()}"
+               th:href="@{/employees(page=${employeess.number - 1}, key=${name},key=${pos},key=${div},key=${edu})}">Previous</a>
+        </li>
+        <li class="page-item">
+            <span class="page-link" th:text="${employeess.number + 1}"></span>
+        </li>
+        <li class="page-link">/</li>
+        <li class="page-item">
+            <span class="page-link" th:text="${employeess.totalPages}"></span>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:if="${employeess.hasNext()}"
+               th:href="@{/employees(page=${employeess.number + 1}, key=${name},key=${pos},key=${div},key=${edu})}">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
+
 </body>
 </html>

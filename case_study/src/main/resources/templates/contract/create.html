@@ -2,74 +2,82 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create customer</title>
-    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
+    <title>Create contract</title>
+
+    <th:block th:replace="~{layout_for_all :: cdn-bootstrap-4} "></th:block>
+
 </head>
 <body>
-<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
+<th:block th:replace="~{layout_for_all :: nav-cdn }"></th:block>
 <center>
-    <h3>Create customer</h3>
-    <form th:action="@{/contracts/save}" th:object="${contractDto}" method="post">
-        <fieldset>
-            <legend>Form create contract</legend>
-            <table border="1">
-                <tr>
-                    <th>Contract date</th>
-                    <td><input type="date" th:field="*{startDay}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('startDay')}" th:errors="*{startDay}"></p></td>
-                </tr>
-                <tr>
-                    <th>Contract end date</th>
-                    <td><input type="date" th:field="*{enDay}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('enDay')}" th:errors="*{enDay}"></p></td>
-                </tr>
-                <tr>
-                    <th>Deposit</th>
-                    <td><input type="text" th:field="*{deposit}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}"></p></td>
-                </tr>
-                <tr>
-                    <th>Employee</th>
-                    <td>
-                        <select th:field="*{employee}">
-                            <option th:each="e : ${employees}"
-                                    th:value="${e.idEmployee}"
-                                    th:text="${e.nameEmployee}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Customer</th>
-                    <td>
-                        <select th:field="*{customer}">
-                            <option th:each="c : ${customers}"
-                                    th:value="${c.idCustomer}"
-                                    th:text="${c.nameCustomer}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Service</th>
-                    <td>
-                        <select th:field="*{service}">
-                            <option th:each="s : ${services}"
-                                    th:value="${s.id}"
-                                    th:text="${s.svName}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <td></td>
-                <td><input type="submit" value="Save"></td>
-                </tr>
-            </table>
-        </fieldset>
-    </form>
+    <h3>Create contract</h3>
+    <div class="table">
+        <form th:action="@{/contracts/save}" th:object="${contractDto}" method="post">
+            <fieldset>
+                <legend>Form create contract</legend>
+                <table>
+                    <tr>
+                        <th>Contract date</th>
+                        <td><input class="form-control" type="date" th:field="*{startDay}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('startDay')}" th:errors="*{startDay}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Contract end date</th>
+                        <td><input class="form-control" type="date" th:field="*{enDay}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('enDay')}" th:errors="*{enDay}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Deposit</th>
+                        <td><input class="form-control" type="text" th:field="*{deposit}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Employee</th>
+                        <td>
+                            <select class="form-control" th:field="*{employee}">
+                                <option th:each="e : ${employees}"
+                                        th:value="${e.idEmployee}"
+                                        th:text="${e.nameEmployee}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Customer</th>
+                        <td>
+                            <select class="form-control" th:field="*{customer}">
+                                <option th:each="c : ${customers}"
+                                        th:value="${c.idCustomer}"
+                                        th:text="${c.nameCustomer}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Service</th>
+                        <td>
+                            <select class="form-control" th:field="*{service}">
+                                <option th:each="s : ${services}"
+                                        th:value="${s.id}"
+                                        th:text="${s.svName}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <td></td>
+                    <td><button class="btn btn-primary" type="submit">Submit</button></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+
+    </div>
+    <th:block th:replace="~{layout_for_all :: cdn-footer}"></th:block>
+    <th:block th:replace="~{layout_for_all :: cdn-js}"></th:block>
 </center>
 
-<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
-<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
+
 </body>
 </html>

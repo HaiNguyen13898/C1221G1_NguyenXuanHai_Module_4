@@ -19,7 +19,7 @@ public class CustomerType {
         this.nameCusType = nameCusType;
     }
 
-    @OneToMany(mappedBy = "customerType")
+    @OneToMany(mappedBy = "customerType", cascade = CascadeType.ALL)
     private List<Customer> customerList;
 
     public List<Customer> getCustomerList() {

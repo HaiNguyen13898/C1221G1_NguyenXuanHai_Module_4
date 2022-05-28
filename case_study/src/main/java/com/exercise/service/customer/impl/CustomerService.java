@@ -1,5 +1,6 @@
 package com.exercise.service.customer.impl;
 
+import com.exercise.dto.Booking;
 import com.exercise.model.customer.Customer;
 import com.exercise.repository.customer.ICustomerRepository;
 import com.exercise.service.customer.ICustomerService;
@@ -50,5 +51,10 @@ public class CustomerService implements ICustomerService {
     public Page<Customer> findAll2(String nameVal, String areaVal, int cusType, Pageable pageable) {
         return customerRepository.findAllByNameCustomerContainingAndAddressContainingAndCustomerType_Id
                 (nameVal, areaVal, cusType, pageable);
+    }
+
+    @Override
+    public Page<Booking> findBooking(Pageable pageable) {
+        return this.customerRepository.findBooking(pageable);
     }
 }

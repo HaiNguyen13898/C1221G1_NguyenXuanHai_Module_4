@@ -124,11 +124,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete")
-    public String deleteForm(@RequestParam int id, RedirectAttributes redirectAttributes) {
-        Employee employee = employeeService.findById(id);
+    public String deleteForm(@RequestParam int idEmployee, RedirectAttributes redirectAttributes) {
+        Employee employee = employeeService.findById(idEmployee);
         employeeService.remove(employee);
         redirectAttributes.addFlashAttribute("message", "Successful delete ");
-        return "redirect:/customers";
+        return "redirect:/employees";
     }
 
 

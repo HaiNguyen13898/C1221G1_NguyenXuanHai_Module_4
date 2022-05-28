@@ -7,21 +7,32 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class EmployeeDto implements Validator {
-
     private int idEmployee;
     @NotBlank
     private String nameEmployee;
+
     private String dateBirth;
+
     @NotBlank
+    @Pattern(regexp = "[0-9]+|", message = "Nhập số, không được nhập chữ (từ 0 đến 9)")
     private String idCardEmployee;
+
     private String salary;
     @NotBlank
+    @Pattern(regexp = "^((0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}+|)$",
+            message = "Nhập số, không được nhập chữ.Số đầu tiên phải là số 0 và tối đa 10 số")
     private String phoneNumber;
+
+    @NotBlank
+    @Pattern(regexp = "(^(\\w+.@\\w+.\\w{2,4})+|)$", message = "Sai định dạng (VD: hai@gmail.com)")
     private String email;
+
     @NotBlank
     private String address;
+
     private Position position;
     private EducationDegree educationDegree;
     private Division division;

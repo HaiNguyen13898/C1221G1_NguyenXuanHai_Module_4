@@ -29,7 +29,6 @@
             <th scope="col">Customer</th>
             <th scope="col">Service</th>
             <th scope="col">Detail</th>
-            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
@@ -43,9 +42,10 @@
             <td th:text="${contract.employee.nameEmployee}"></td>
             <td th:text="${contract.customer.nameCustomer}"></td>
             <td th:text="${contract.service.svName}"></td>
-            <td><a>Detail</a></td>
-            <td><a th:href="@{/contracts/edit(id=${contract.idContract})}">Edit</a></td>
-            <td><a th:href="@{/contracts/delete(id=${contract.idContract})}">Delete</a></td>
+            <td><a th:href="@{/contracts/view(id=${contract.idContract})}" class="btn btn-primary">Detail</a></td>
+            <td>
+                <a th:href="@{/contracts/delete(id=${contract.idContract})}" class="btn btn-primary">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>

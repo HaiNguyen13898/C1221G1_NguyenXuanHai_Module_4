@@ -1,7 +1,9 @@
 package com.exercise.controller.contract;
 
+import com.exercise.dto.ContractDetailDto;
 import com.exercise.dto.ContractDto;
 import com.exercise.model.contract.Contract;
+import com.exercise.model.contract.ContractDetail;
 import com.exercise.service.contract.IAttachSvService;
 import com.exercise.service.contract.IContractDetailService;
 import com.exercise.service.contract.IContractService;
@@ -32,42 +34,39 @@ public class ContractDetailController {
     private IContractDetailService iContractDetailService;
 
 
-    @GetMapping()
+    @GetMapping("")
     public String showList(Model model, @PageableDefault(value = 4) Pageable pageable) {
         model.addAttribute("contractDetail", iContractDetailService.findAll2(pageable));
-        return "contractDetail/list";
+        return "/contractDetail/list";
     }
 
-//    @GetMapping(value = "/create")
-//    public String showCreateForm(Model model) {
-//        model.addAttribute("employees", employeeService.findAll2());
-//        model.addAttribute("customers", customerService.findAll3());
-//        model.addAttribute("services", service.findAll2());
-//        model.addAttribute("contractDto", new ContractDto());
-//        return "/contract/create";
-//    }
-//
-//
-//    @PostMapping(value = "/save")
-//    public String save(@ModelAttribute @Validated ContractDto contractDto,
-//                       BindingResult bindingResult,
-//                       RedirectAttributes redirectAttributes, Model model) {
-//
-//        new ContractDto().validate(contractDto, bindingResult);
-//        if (bindingResult.hasFieldErrors()) {
-//            model.addAttribute("employees", employeeService.findAll2());
-//            model.addAttribute("customers", customerService.findAll3());
-//            model.addAttribute("services", service.findAll2());
-//            return "/contract/create";
-//        } else {
-//            Contract contract = new Contract();
-//            BeanUtils.copyProperties(contractDto, contract);
-//            contractService.save(contract);
-//            redirectAttributes.addFlashAttribute("message", "Successfully added new");
-//            return "redirect:/contracts";
-//        }
-//    }
 
+    @GetMapping(value = "/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("attachSV", iAttachSvService.findAll());
+        model.addAttribute("contracts", iContractService.findAll2());
+        model.addAttribute("contractDetailDto", new ContractDetailDto());
+        return "/contractDetail/create";
+    }
+
+
+    @PostMapping(value = "/save")
+    public String save(@ModelAttribute @Validated ContractDetailDto contractDetailDto,
+                       BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes, Model model) {
+
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("attachSV", iAttachSvService.findAll());
+            model.addAttribute("contracts", iContractService.findAll2());
+            return "/contractDetail/create";
+        } else {
+            ContractDetail contractDetail = new ContractDetail();
+            BeanUtils.copyProperties(contractDetailDto, contractDetail);
+            iContractDetailService.save(contractDetail);
+            redirectAttributes.addFlashAttribute("message", "Successfully added new");
+            return "redirect:/contractDetail";
+        }
+    }
 
 
 }

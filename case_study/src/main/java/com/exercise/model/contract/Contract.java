@@ -45,7 +45,7 @@ public class Contract {
     @JoinColumn(name="idCustomer", referencedColumnName = "idCustomer")
     private Customer customer;
 
-    @OneToMany(mappedBy = "contract")
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     List<ContractDetail> contractDetailList;
 
     public int getIdContract() {

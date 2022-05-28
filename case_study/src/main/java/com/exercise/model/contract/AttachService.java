@@ -32,7 +32,7 @@ public class AttachService {
         this.contractDetailList = contractDetailList;
     }
 
-    @OneToMany(mappedBy = "attachService")
+    @OneToMany(mappedBy = "attachService", cascade = CascadeType.ALL)
     private List<ContractDetail> contractDetailList;
 
     public int getId() {

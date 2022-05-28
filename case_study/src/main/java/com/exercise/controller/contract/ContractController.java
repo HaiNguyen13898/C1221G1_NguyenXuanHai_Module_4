@@ -81,8 +81,8 @@ public class ContractController {
 
     @GetMapping("/view")
     public String view(@RequestParam int id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
-        return "/customer/view";
+        model.addAttribute("contract", contractService.findById(id));
+        return "/contract/view";
     }
 
 }

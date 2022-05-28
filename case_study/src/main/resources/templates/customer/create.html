@@ -3,80 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Create customer</title>
-    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
+    <th:block th:replace="~{layout_for_all :: cdn-bootstrap-4} "></th:block>
 </head>
 <body>
-<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
-
+<th:block th:replace="~{layout_for_all :: nav-cdn }"></th:block>
+<br>
 <center>
     <h3>Create customer</h3>
-    <form th:action="@{/customers/save}" th:object="${customerDto}" method="post">
-        <fieldset>
-            <legend>Form create product</legend>
-            <table border="1">
-                <tr>
-                    <th>Name</th>
-                    <td><input type="text" th:field="*{nameCustomer}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('nameCustomer')}"
-                           th:errors="*{nameCustomer}"></p></td>
-                </tr>
-                <tr>
-                    <th>Date of birth</th>
-                    <td><input type="date" th:field="*{dateOfBirth}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}"
-                           th:errors="*{dateOfBirth}"></p></td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td>
-                        <select th:field="*{gender}">
-                            <option th:value="Nam">Nam</option>
-                            <option th:value="Nữ">Nữ</option>
-                            <option th:value="Gay">Gay</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Id card</th>
-                    <td><input type="text" th:field="*{idCard}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p></td>
-                </tr>
-                <tr>
-                    <th>Phone number</th>
-                    <td><input type="text" th:field="*{phoneNumber}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
-                           th:errors="*{phoneNumber}"></p></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="text" th:field="*{email}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td><input type="text" th:field="*{address}"></td>
-                    <td><p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p></td>
-                </tr>
-                <tr>
-                    <th>Customer Type</th>
-                    <td>
-                        <select th:field="*{customerType}">
-                            <option th:each="c : ${customerType}"
-                                    th:value="${c.id}"
-                                    th:text="${c.nameCusType}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <td></td>
-                <td><input type="submit" value="Save"></td>
-                </tr>
-            </table>
-        </fieldset>
-    </form>
-</center>
 
-<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
-<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
+    <div class="table">
+        <form th:action="@{/customers/save}" th:object="${customerDto}" method="post">
+            <fieldset>
+                <legend>Customer Information</legend>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <td><input class="form-control" type="text" th:field="*{nameCustomer}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('nameCustomer')}"
+                               th:errors="*{nameCustomer}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Date of birth</th>
+                        <td><input class="form-control" type="date" th:field="*{dateOfBirth}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}"
+                               th:errors="*{dateOfBirth}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>
+                            <select class="form-control" th:field="*{gender}">
+                                <option th:value="Nam">Nam</option>
+                                <option th:value="Nữ">Nữ</option>
+                                <option th:value="Gay">Gay</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Id card</th>
+                        <td><input class="form-control" type="text" th:field="*{idCard}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Phone number</th>
+                        <td><input class="form-control" type="text" th:field="*{phoneNumber}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
+                               th:errors="*{phoneNumber}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><input class="form-control" type="text" th:field="*{email}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td><input class="form-control" type="text" th:field="*{address}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Customer Type</th>
+                        <td>
+                            <select class="form-control" th:field="*{customerType}">
+                                <option th:each="c : ${customerType}"
+                                        th:value="${c.id}"
+                                        th:text="${c.nameCusType}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+
+    <th:block th:replace="~{layout_for_all :: cdn-footer}"></th:block>
+    <th:block th:replace="~{layout_for_all :: cdn-js}"></th:block>
+</center>
 </body>
 </html>

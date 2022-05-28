@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create customer</title>
+    <th:block th:replace="~{layout_for_all :: cdn-bootstrap-4} "></th:block>
 </head>
 <body>
+<th:block th:replace="~{layout_for_all :: nav-cdn }"></th:block>
+<center>
+    <h3>Create contract detail</h3>
+    <div class="table">
+        <form th:action="@{/contractDetail/save}" th:object="${contractDetailDto}" method="post">
+            <fieldset>
+                <legend>Form create contract detail</legend>
+                <table >
+                    <tr>
+                        <th>Quantity</th>
+                        <td><input class="form-control" type="number" th:field="*{quantity}"></td>
+                        <td><p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p></td>
+                    </tr>
 
+                    <tr>
+                        <th>Customer name</th>
+                        <td>
+                            <select class="form-control" th:field="*{contract}">
+                                <option th:each="c : ${contracts}"
+                                        th:value="${c.idContract}"
+                                        th:text="${c.customer.nameCustomer}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Customer</th>
+                        <td>
+                            <select class="form-control" th:field="*{attachService}">
+                                <option th:each="a : ${attachSV}"
+                                        th:value="${a.id}"
+                                        th:text="${a.nameAttachService}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <td></td>
+                    <td> <button class="btn btn-primary" type="submit">Submit</button></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+
+    <th:block th:replace="~{layout_for_all :: cdn-footer}"></th:block>
+    <th:block th:replace="~{layout_for_all :: cdn-js}"></th:block>
+</center>
 </body>
 </html>

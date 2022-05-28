@@ -9,15 +9,9 @@ public interface IServiceRepository extends JpaRepository<Service, Integer> {
     //    Page<Service> findAllBySvNameContainingAndDescriptionOtherConvenienceContainingAndPoolAreaContaining
 //            (String name, String des, String area, Pageable pageable);
     Page<Service> findAllBySvNameContainingAndSvAreaContainingAndSvCostContaining(
-            String name, String area, String cost, Pageable pageable
-    );
+            String name, String area, String cost, Pageable pageable);
 
     Page<Service> findAll(Pageable pageable);
-//    Page<Service> findAllBySvNameContainingAndPoolAreaContainingAndDescriptionOtherConvenienceContaining
-//            (String name, String area, String des,  Pageable pageable);
-//
-//    Page<Service> findAllBySvNameAndPoolAreaAndDescriptionOtherConvenience
-//            (String name, String area, String des,  Pageable pageable);
 
 
 }

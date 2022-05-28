@@ -56,14 +56,14 @@ INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, 
 INSERT INTO `case`.`contract` (`start_day`, `en_day`, `deposit`, `id_employee`, `id_customer`, `id_service`) VALUES ( '2021-05-25', '2021-05-27', '0', '7', '10', '1');
 
 
-INSERT INTO `case`.`contract_detail` ( `quantity`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('1', '5', '2', '4');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('2', '8', '2', '5');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('3', '15', '2', '6');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('4', '1', '3', '1');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('5', '11', '3', '2');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('6', '1', '1', '3');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('7', '2', '1', '2');
-INSERT INTO `case`.`contract_detail` (`ma_hop_dong_chi_tiet`, `so_luong`, `ma_hop_dong`, `ma_dich_vu_di_kem`) VALUES ('8', '2', '12', '2');
+INSERT INTO `case`.`contract_detail` ( `quantity`, `id_contract`, `id_attch_service`) VALUES ( '5', '10', '4');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '8', '18', '5');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '15', '12', '6');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '1', '11', '1');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '11', '25', '2');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '1', '21', '3');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '2', '19', '2');
+INSERT INTO `case`.`contract_detail` (`quantity`, `id_contract`, `id_attch_service`) VALUES ( '2', '24', '2');
 
 
 INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Karaoke', '10000', 'giờ', 'tiện nghi, hiện tại');
@@ -72,6 +72,22 @@ INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `st
 INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Buffet buổi sáng', '15000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
 INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Buffet buổi trưa', '90000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
 INSERT INTO `case`.`attach_service` ( `name_attach_service`, `cost`, `unit`, `status`) VALUES ( 'Buffet buổi tối', '16000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
+
+select name_customer as `nameCustomer`, en_day as `enDay` , start_day as `starDay`, group_concat(name_attach_service) as `attachService`, sum(service.sv_cost+(contract_detail.quantity*attach_service.cost)) as `total` from customer join contract on customer.id_customer = contract.id_customer
+join contract_detail on contract.id_contract  = contract_detail.id_contract join attach_service on attach_service.id = contract_detail.id_attch_service 
+join service on service.id= contract.id_service
+group by contract.id_contract;
+
+
+
+
+
+
+
+
+
+
+
 
 
 ALTER TABLE contract

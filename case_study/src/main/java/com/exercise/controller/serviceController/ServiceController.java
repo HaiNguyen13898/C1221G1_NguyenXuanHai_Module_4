@@ -34,7 +34,6 @@ public class ServiceController {
     @GetMapping()
     public String showList(Model model,
                            @PageableDefault(value = 3) Pageable pageable) {
-
         model.addAttribute("servicess", iService.findAll(pageable));
         return "service/list";
     }

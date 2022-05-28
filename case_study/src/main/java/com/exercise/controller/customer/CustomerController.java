@@ -105,7 +105,7 @@ public class CustomerController {
     }
 
     @GetMapping("/delete")
-    public String deleteForm(@RequestParam int id, RedirectAttributes redirectAttributes) {
+    public String deleteForm(@RequestParam(name = "idCustomer") Integer id, RedirectAttributes redirectAttributes) {
         Customer customer = customerService.findById(id);
         customerService.remove(customer);
         redirectAttributes.addFlashAttribute("message", "Successful delete ");
@@ -119,5 +119,11 @@ public class CustomerController {
         return "/customer/view";
     }
 
+
+    @GetMapping("/booking")
+    public String listBooking(Model model, @PageableDefault() Pageable pageable){
+        model.addAttribute("bookings",this.customerService.findBooking(pageable));
+        return "/customer/booking";
+    }
 
 }

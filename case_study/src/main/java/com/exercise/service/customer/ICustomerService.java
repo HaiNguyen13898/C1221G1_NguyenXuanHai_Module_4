@@ -1,5 +1,6 @@
 package com.exercise.service.customer;
 
+import com.exercise.dto.Booking;
 import com.exercise.model.customer.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +22,6 @@ public interface ICustomerService {
     Page<Customer> findAll1(String nameVal, String areaVal, Pageable pageable);
 
     Page<Customer> findAll2(String nameVal, String areaVal, int cusType, Pageable pageable);
+
+    Page<Booking> findBooking(Pageable pageable);
 }

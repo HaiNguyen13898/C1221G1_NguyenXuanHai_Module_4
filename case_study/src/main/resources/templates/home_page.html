@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
     <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
 </head>
 <body>
-<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
+<th:block th:replace="~{layout_for_all :: nav_bootstrap }"></th:block>
 
-
-
-
-
+<th:block th:replace="~{layout_for_all :: banner }"></th:block>
+<th:block th:replace="~{layout_for_all :: about-us }"></th:block>
+<th:block th:replace="~{layout_for_all :: our-room }"></th:block>
+<th:block th:replace="~{layout_for_all :: gallery }"></th:block>
 
 <th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
 <th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>

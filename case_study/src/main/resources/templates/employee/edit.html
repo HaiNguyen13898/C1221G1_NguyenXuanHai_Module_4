@@ -3,66 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit information</title>
-    <th:block th:replace="~{layout_for_all :: head_bootstrap} "></th:block>
+    <th:block th:replace="~{layout_for_all :: cdn-bootstrap-4} "></th:block>
 
 </head>
 <body>
-<th:block th:replace="~{layout_for_all ::nav_bootstrap }"></th:block>
-
+<th:block th:replace="~{layout_for_all :: nav-cdn }"></th:block>
 <center>
     <h3>
         Edit employee
     </h3>
-
+<div class="table">
     <form th:action="@{/employees/update}" th:object="${employeeDto}" method="post">
         <fieldset>
             <legend>Employee Information</legend>
             <table border="1">
-                <input type="hidden" th:field="*{idEmployee}">
+                <input  type="hidden" th:field="*{idEmployee}">
                 <tr>
                     <th>Employee name</th>
-                    <td><input type="text" th:field="*{nameEmployee}"></td>
+                    <td><input class="form-control" type="text" th:field="*{nameEmployee}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('nameEmployee')}"
                            th:errors="*{nameEmployee}"></p></td>
                 </tr>
                 <tr>
                     <th>Date of birth</th>
-                    <td><input type="date" th:field="*{dateBirth}"></td>
+                    <td><input class="form-control" type="date" th:field="*{dateBirth}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('dateBirth')}" th:errors="*{dateBirth}"></p>
                     </td>
                 </tr>
                 <tr>
                     <th>Id card</th>
-                    <td><input type="text" th:field="*{idCardEmployee}"></td>
+                    <td><input class="form-control" type="text" th:field="*{idCardEmployee}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('idCardEmployee')}"
                            th:errors="*{idCardEmployee}"></p></td>
                 </tr>
                 <tr>
                     <th>Salary</th>
-                    <td><input type="text" th:field="*{salary}"></td>
+                    <td><input class="form-control" type="text" th:field="*{salary}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p></td>
                 </tr>
                 <tr>
                     <th>Phone number</th>
-                    <td><input type="text" th:field="*{phoneNumber}"></td>
+                    <td><input class="form-control" type="text" th:field="*{phoneNumber}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
                            th:errors="*{phoneNumber}"></p></td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td><input type="text" th:field="*{email}"></td>
+                    <td><input class="form-control" type="text" th:field="*{email}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td><input type="text" th:field="*{address}"></td>
+                    <td><input class="form-control" type="text" th:field="*{address}"></td>
                     <td><p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p></td>
                 </tr>
 
                 <tr>
                     <th>Position</th>
                     <td>
-                        <select th:field="*{position}">
+                        <select class="form-control" th:field="*{position}">
                             <option th:each="p : ${position}"
                                     th:value="${p.idPosition}"
                                     th:text="${p.namePosition}">
@@ -73,7 +72,7 @@
                 <tr>
                     <th>Education degree</th>
                     <td>
-                        <select th:field="*{educationDegree}">
+                        <select class="form-control" th:field="*{educationDegree}">
                             <option th:each="e : ${education}"
                                     th:value="${e.idEducation}"
                                     th:text="${e.nameEducation}">
@@ -84,7 +83,7 @@
                 <tr>
                     <th>Division</th>
                     <td>
-                        <select th:field="*{division}">
+                        <select class="form-control" th:field="*{division}">
                             <option th:each="d : ${division}"
                                     th:value="${d.idDivision}"
                                     th:text="${d.nameDivision}">
@@ -93,17 +92,18 @@
                     </td>
                 </tr>
                 <td></td>
-                <td><input type="submit" value="Update"></td>
+                <td><button class="btn btn-primary" type="submit">Submit</button></td>
                 </tr>
-
             </table>
         </fieldset>
     </form>
+
+</div>
 </center>
 
 
 
-<th:block th:replace="~{layout_for_all :: footer_bootstrap}"></th:block>
-<th:block th:replace="~{layout_for_all :: js_bootstrap}"></th:block>
+<th:block th:replace="~{layout_for_all :: cdn-footer}"></th:block>
+<th:block th:replace="~{layout_for_all :: cdn-js}"></th:block>
 </body>
 </html>

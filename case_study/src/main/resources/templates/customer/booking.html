@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <th:block th:replace="~{layout_for_all :: cdn-bootstrap-4} "></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout_for_all :: nav-cdn }"></th:block>
+<center>
+    <h2>Booking list</h2>
+
+    <p th:text="${message}" style="color: red"></p>
+    <br>
+    <div class="table">
+        <table>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Customer name</th>
+                <th scope="col">Start day</th>
+                <th scope="col">End day</th>
+                <th scope="col">Attach service</th>
+                <th scope="col">Total</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="b : ${bookings}">
+                <td th:text="${b.nameCustomer}"></td>
+                <td th:text="${b.starDay}"></td>
+                <td th:text="${b.enDay}"></td>
+                <td th:text="${b.attachService}"></td>
+                <td th:text="${b.total}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</center>
+<th:block th:replace="~{layout_for_all :: cdn-footer}"></th:block>
+<th:block th:replace="~{layout_for_all :: cdn-js}"></th:block>
+</body>
+</html>

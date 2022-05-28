@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <th:block th:replace="~{layout_for_all :: cdn-bootstrap-4} "></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout_for_all :: nav-cdn }"></th:block>
+
+<center>
+
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>Customer</th>
+                <td th:text="${contract.customer.nameCustomer}"></td>
+            </tr>
+            <tr>
+                <th>Id card customer</th>
+                <td th:text="${contract.customer.idCard}"></td>
+            </tr>
+            <tr>
+                <th>Start day</th>
+                <td th:text="${contract.startDay}"></td>
+            </tr>
+            <tr>
+                <th>End day</th>
+                <td th:text="${contract.enDay}"></td>
+            </tr>
+            <tr>
+                <th>Service</th>
+                <td th:text="${contract.service.svName}"></td>
+            </tr>
+        </table>
+    </div>
+</center>
+<th:block th:replace="~{layout_for_all :: cdn-footer}"></th:block>
+<th:block th:replace="~{layout_for_all :: cdn-js}"></th:block>
+</body>
+</html>

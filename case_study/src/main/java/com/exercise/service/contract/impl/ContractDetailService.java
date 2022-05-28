@@ -20,13 +20,19 @@ public class ContractDetailService implements IContractDetailService {
         return contractDetailRepository.findAll();
     }
 
-    @Override
-    public Page<ContractDetail> findAll2(Pageable pageable) {
-        return contractDetailRepository.findAll2(pageable);
-    }
 
     @Override
     public void save(ContractDetail contractDetail) {
         contractDetailRepository.save(contractDetail);
+    }
+
+    @Override
+    public ContractDetail findById(int id) {
+        return contractDetailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Page<ContractDetail> findAll2(Pageable pageable) {
+        return contractDetailRepository.findAll(pageable);
     }
 }
